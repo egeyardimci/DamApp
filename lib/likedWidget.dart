@@ -1,3 +1,4 @@
+import 'package:agaol/requestCardWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:agaol/bottomBarWidget.dart';
 import 'package:agaol/topBarWidget.dart';
@@ -11,6 +12,52 @@ class LikedWidget extends StatelessWidget {
     return Scaffold(
       appBar: TopBarWidget(title: 'DamApp',),
       bottomNavigationBar: BottomBarWidget(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            LikeProfileWidget(),
+            LikeProfileWidget(),
+            LikeProfileWidget(),
+            LikeProfileWidget()
+          ],
+        ),
+      )
     );
   }
 }
+
+class LikeProfileWidget extends StatefulWidget {
+  LikeProfileWidget({super.key});
+
+  @override
+  State<LikeProfileWidget> createState() => _LikeProfileWidgetState();
+}
+
+class _LikeProfileWidgetState extends State<LikeProfileWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        RequestCardWidget(name: "Ege",date: "Persembe",
+            time: "17:00",location: "Istanbul",lookingFor: "Woman",whoPays: "Me") ,
+        Container(
+          margin: EdgeInsets.fromLTRB(130, 10, 130, 10),
+          child: Card(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(onPressed: () {},
+                  icon: Icon(Icons.message),
+                ),
+                IconButton(onPressed: () {},
+                  icon: Icon(Icons.delete),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
