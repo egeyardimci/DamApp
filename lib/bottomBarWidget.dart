@@ -20,7 +20,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
   void changeRoute(int index){
     String rootName = ModalRoute.of(context)!.settings.name!;
     if(rootName != routes[index]){
-      Navigator.pushNamed(context, routes[index]);
+      Navigator.pushReplacementNamed(context, routes[index]);
     }
   }
 
