@@ -12,9 +12,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[50],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("DAM PROFILE",
+        title: Text("",
           style: TextStyle(
             color: Colors.lightBlueAccent,
             letterSpacing: 1.5,
@@ -24,82 +24,53 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         ),
         backgroundColor: Colors.lightBlue[900],
         elevation: 0.0,
-
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-          });
-        },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.lightBlue[900],
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            CircleAvatar(
-              backgroundImage: AssetImage("assets/me.jpg"),
-              radius: 40.0,
+            Center(
+              child: CircleAvatar(
+                radius: 50.0,
+              ),
             ),
             Divider(
               height: 60.0,
-              color: Colors.lightBlue[900],
+              color: Colors.red,
             ),
             Text("Name:",
               style: TextStyle(
-                color: Colors.lightBlue[900],
-                letterSpacing: 1.5,
-                fontSize: 28.0,
+                color: Colors.red,
+                fontSize: 25.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 10.0),
-            Text("Age: e",
+            Text("Age: ",
               style: TextStyle(
-                color: Colors.lightBlue[900],
-                letterSpacing: 1.5,
-                fontSize: 28.0,
+                color: Colors.red,
+                fontSize: 25.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 10.0),
             Text("Gender:",
               style: TextStyle(
-                color: Colors.lightBlue[900],
-                letterSpacing: 1.5,
-                fontSize: 28.0,
+                color: Colors.red,
+                fontSize: 25.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 10.0),
             Text("Dating Preferance:",
               style: TextStyle(
-                color: Colors.lightBlue[900],
+                color: Colors.red,
                 letterSpacing: 1.5,
-                fontSize: 28.0,
+                fontSize: 25.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 30.0),
-            Row(
-              children: <Widget>[
-                Icon(
-                  Icons.email_rounded,
-                  color: Colors.grey[500],
-                ),
-                SizedBox(width: 10.0),
-                Text(
-                  "dam_bulmakistiyorum@gmail.com",
-                  style: TextStyle(
-                    color: Colors.black,
-                    letterSpacing: 1.5,
-                    fontSize: 15.0,
-                  ),
-                ),
-              ],
-            )
           ],
         ),
       ),
