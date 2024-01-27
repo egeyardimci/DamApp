@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:agaol/profileWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -11,7 +12,12 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  int level = 0;
+  int _currentIndex = 0;
+
+  // Your screen widgets go here
+  final Map routes = {
+    3 : "/profile",
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +54,13 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+            Navigator.pushNamed(context, routes[_currentIndex]);
+          });
+        },
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
