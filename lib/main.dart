@@ -6,9 +6,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import "quoteWidget.dart";
 
-void main() => runApp(MaterialApp(
-  home: HomeWidget()
-));
+void main() => runApp(MyApp());
+
+
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeWidget(),
+      },
+    );
+  }
+}
 
 class HomeWidget extends StatefulWidget {
   HomeWidget({super.key});
@@ -51,72 +67,6 @@ class _HomeWidgetState extends State<HomeWidget> {
 
           ),
         ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(10, 20, 10,0 ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                child: CircleAvatar(
-                  radius: 70.0,
-                  backgroundImage: AssetImage('assets/foto.png')
-                ),
-              ),
-              Divider(
-                height: 60,
-                color: Colors.grey[850],
-              ),
-              Text(
-                "Ege Yardımcı",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Computer Science and Engineering",
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                  Icon(
-                    Icons.email,
-                  ),
-                  Text(
-                    "  ege.yardimci@sabanciuniv.edu",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ]
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Level $level",
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Quotes(),
-            ],
-          ),
-        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
