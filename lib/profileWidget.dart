@@ -21,7 +21,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       backgroundColor: Colors.white,
       appBar: TopBarWidget(title: "DamApp",),
       bottomNavigationBar: BottomBarWidget(),
-      body: profileCardWidget(name:"ege", gender: "male", age: 21, preference: "female")
+      body: ProfileCardWidget(name:"ege", gender: "male", age: 21, preference: "female")
     );
   }
 }

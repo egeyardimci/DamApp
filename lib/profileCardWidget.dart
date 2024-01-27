@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class profileCardWidget extends StatelessWidget {
+class ProfileCardWidget extends StatelessWidget {
 
   String name;
   String gender;
   String preference;
   int age;
 
-  profileCardWidget({super.key, required this.name,required this.gender, required this.age, required this.preference});
+  ProfileCardWidget({super.key, required this.name,required this.gender, required this.age, required this.preference});
 
   @override
   Widget build(BuildContext context) {
