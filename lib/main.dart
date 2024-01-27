@@ -5,12 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:agaol/homeWidget.dart';
+import 'package:agaol/profileWidget.dart';
 
 void main() => runApp(MaterialApp(
   initialRoute: '/loading',
   routes: {
     '/loading': (context) => LoadingWidget(),
-    '/home': (context) => HomeWidget()
+    '/home': (context) => HomeWidget(),
+    '/profile': (context) => ProfileWidget()
   },
 ));
 
