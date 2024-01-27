@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:agaol/bottomBarWidget.dart';
+import 'package:agaol/requestCardWidget.dart';
 import 'package:agaol/topBarWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,16 +14,45 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBarWidget(title: 'DamApp',),
       bottomNavigationBar: BottomBarWidget(),
+      body: Column(
+        children: [
+          RequestCardWidget(name: "Ege",date: "Persembe",
+              time: "17:00",location: "Istanbul",lookingFor: "Woman",whoPays: "Me") ,
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.fromLTRB(100, 40, 100, 40),
+              child: Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(onPressed: () {},
+                      icon: Icon(Icons.chevron_left),
+                    ),
+                    IconButton(onPressed: () {},
+                      icon: Icon(Icons.thumb_up),
+                    ),
+                    IconButton(onPressed: () {},
+                      icon: Icon(Icons.thumb_down),
+                    ),
+                    IconButton(onPressed: () {},
+                      icon: Icon(Icons.chevron_right),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      )
+
     );
   }
 }
+
 
 
