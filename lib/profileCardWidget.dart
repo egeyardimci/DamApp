@@ -28,8 +28,14 @@ class ProfileCardWidget extends StatelessWidget {
                       flex: 2,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                        child: Image(
-                          image: AssetImage("assets/foto.jpeg"),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade600, width: 2.0), // Set border color and width
+                              borderRadius: BorderRadius.zero
+                          ),
+                          child: Image(
+                            image: AssetImage("assets/foto.jpeg"),
+                          ),
                         ),
                       ),
                     ),
