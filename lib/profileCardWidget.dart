@@ -1,28 +1,20 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:agaol/bottomBarWidget.dart';
-import 'package:agaol/topBarWidget.dart';
 import 'package:flutter/widgets.dart';
 
-class RequestCardWidget extends StatelessWidget {
+class profileCardWidget extends StatelessWidget {
 
   String name;
-  String date;
-  String time;
-  String location;
-  String whoPays;
-  String lookingFor;
+  String gender;
+  String preference;
+  int age;
 
-  RequestCardWidget({super.key,required this.name,required this.date, required this.time,
-  required this.location, required this.lookingFor, required this.whoPays}
-  );
+  profileCardWidget({super.key, required this.name,required this.gender, required this.age, required this.preference});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.65,
+      height: MediaQuery.of(context).size.height * 0.50,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -35,15 +27,9 @@ class RequestCardWidget extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade600, width: 2.0), // Set border color and width
-                            borderRadius: BorderRadius.zero
-                          ),
-                          child: Image(
-                            image: AssetImage("assets/foto.jpeg"),
-                          ),
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Image(
+                          image: AssetImage("assets/foto.png"),
                         ),
                       ),
                     ),
@@ -58,39 +44,29 @@ class RequestCardWidget extends StatelessWidget {
                             children: [
                               Text("Name: $name",
                                 style: TextStyle(
-                                  fontSize: 20
+                                    fontSize: 20
                                 ),
                               ),
-                              Text("Date: $date",
+                              Text("Gender: $gender",
                                 style: TextStyle(
                                     fontSize: 20
                                 ),
                               ),
-                              Text("Time: $time",
-                                style: TextStyle(
-                                    fontSize: 20
-                                ),
-                              )
                             ],
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Location: $location",
+                              Text("Age: $age",
                                 style: TextStyle(
                                     fontSize: 20
                                 ),
                               ),
-                              Text("Who pays: $whoPays",
+                              Text("Preference: $preference",
                                 style: TextStyle(
                                     fontSize: 20
                                 ),
                               ),
-                              Text("Looking for: $lookingFor",
-                                style: TextStyle(
-                                    fontSize: 20
-                                ),
-                              )
                             ],
                           ),
                         ],
