@@ -21,8 +21,7 @@ class TopBarWidget extends StatelessWidget implements PreferredSizeWidget {
           color: Colors.white,
           icon: Icon(Icons.favorite),
           onPressed: () {
-            // Add action for the settings button
-            print('Settings button pressed');
+            Navigator.pushReplacementNamed(context,"/liked");
           },
         ),
         IconButton(
@@ -31,7 +30,7 @@ class TopBarWidget extends StatelessWidget implements PreferredSizeWidget {
           icon: Icon(Icons.message),
           onPressed: () {
             // Add action for the settings button
-            print('Settings button pressed');
+            Navigator.pushReplacementNamed(context, "/messages");
           },
 
         ),
