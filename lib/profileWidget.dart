@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:agaol/bottomBarWidget.dart';
+import 'package:agaol/topBarWidget.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({super.key});
