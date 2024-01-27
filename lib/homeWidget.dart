@@ -12,12 +12,22 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  int _currentIndex = 0;
 
   // Your screen widgets go here
   final Map routes = {
+    0 : "/home",
+    1 : "/search",
+    2 : "/add",
     3 : "/profile",
+    4 : "/settings"
   };
+
+  void changeRoute(int index){
+    String rootName = ModalRoute.of(context)!.settings.name!;
+    if(rootName != routes[index]){
+      Navigator.pushNamed(context, routes[index]);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +64,8 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-            Navigator.pushNamed(context, routes[_currentIndex]);
-          });
+          changeRoute(index);
         },
         items: [
           BottomNavigationBarItem(
