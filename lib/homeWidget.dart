@@ -25,7 +25,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               time: "17:00",location: "Istanbul",lookingFor: "Woman",whoPays: "Me") ,
           Expanded(
             child: Container(
-              margin: EdgeInsets.fromLTRB(100, 40, 100, 40),
+              margin: EdgeInsets.fromLTRB(40, 40, 40, 40),
               child: Card(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
