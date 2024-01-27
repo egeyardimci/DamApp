@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:agaol/bottomBarWidget.dart';
+import 'package:agaol/topBarWidget.dart';
 class SearchWidget extends StatefulWidget {
   const SearchWidget({super.key});
 
@@ -9,6 +11,9 @@ class SearchWidget extends StatefulWidget {
 class _SearchWidgetState extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: TopBarWidget(title: 'DamApp',),
+      bottomNavigationBar: BottomBarWidget(),
+    );
   }
 }

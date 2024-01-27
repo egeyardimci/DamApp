@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:agaol/bottomBarWidget.dart';
+import 'package:agaol/topBarWidget.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({super.key});
@@ -10,6 +12,9 @@ class SettingsWidget extends StatefulWidget {
 class _SettingsWidgetState extends State<SettingsWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: TopBarWidget(title: 'DamApp',),
+      bottomNavigationBar: BottomBarWidget(),
+    );
   }
 }
