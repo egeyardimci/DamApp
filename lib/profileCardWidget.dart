@@ -29,7 +29,7 @@ class profileCardWidget extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                         child: Image(
-                          image: AssetImage("assets/foto.png"),
+                          image: AssetImage("assets/foto.jpeg"),
                         ),
                       ),
                     ),
