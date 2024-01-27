@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:agaol/bottomBarWidget.dart';
 import 'package:agaol/topBarWidget.dart';
+import 'package:agaol/bottomBarWidget.dart';
+import 'package:agaol/topBarWidget.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({super.key});
@@ -15,18 +17,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text("",
-          style: TextStyle(
-            color: Colors.lightBlueAccent,
-            letterSpacing: 1.5,
-            fontSize: 28.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Colors.lightBlue[900],
-        elevation: 0.0,
-      ),
+      appBar: TopBarWidget(title: "DamApp",),
+      bottomNavigationBar: BottomBarWidget(),
+
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
         child: Column(
