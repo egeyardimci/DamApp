@@ -71,6 +71,21 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
         ],
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 50,
+          padding: EdgeInsets.symmetric(),
+          child: ElevatedButton(
+            onPressed: () {},
+            child: Text(
+              'Continue',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
