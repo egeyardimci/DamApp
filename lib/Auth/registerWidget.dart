@@ -9,7 +9,12 @@ class registerWidget extends StatefulWidget {
 class _registerWidgetState extends State<registerWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: ElevatedButton(
+        onPressed: () {},
+        child: Text("register"),
+      ),
+    );
   }
 }
 

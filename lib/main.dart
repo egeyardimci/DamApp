@@ -8,24 +8,32 @@ import 'package:agaol/loading.dart';
 import 'package:agaol/messagesWidget.dart';
 import 'package:agaol/searchWidget.dart';
 import 'package:agaol/settingsWidget.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:agaol/homeWidget.dart';
 import 'package:agaol/profileWidget.dart';
 
+import 'firebase_options.dart';
 
-void main() => runApp(MaterialApp(
-initialRoute: '/auth',
-routes: {
-'/auth' : (context) => AuthWrapper(),
-'/loading': (context) => LoadingWidget(),
-'/home': (context) => HomeWidget(),
-'/profile': (context) => ProfileWidget(),
-'/add' : (context) => AddWidget(),
-'/search' : (context) => SearchWidget(),
-'/settings' : (context) => SettingsWidget(),
-'/liked' : (context) => LikedWidget(),
-'/messages' : (context) => MessagesWidget(),
-},
-));
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  runApp(MaterialApp(
+    initialRoute: '/auth',
+    routes: {
+      '/auth' : (context) => AuthWrapper(),
+      '/loading': (context) => LoadingWidget(),
+      '/home': (context) => HomeWidget(),
+      '/profile': (context) => ProfileWidget(),
+      '/add' : (context) => AddWidget(),
+      '/search' : (context) => SearchWidget(),
+      '/settings' : (context) => SettingsWidget(),
+      '/liked' : (context) => LikedWidget(),
+      '/messages' : (context) => MessagesWidget(),
+    },
+  ));
+}
+
