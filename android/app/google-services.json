@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "422307654485",
+    "project_id": "damapp-a9411",
+    "storage_bucket": "damapp-a9411.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422307654485:android:e4a0a2e58a2a496ea41ddc",
+        "android_client_info": {
+          "package_name": "com.example.agaol"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRHOi-HNgCoiikO3F_AArxGyUZteaCEtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
