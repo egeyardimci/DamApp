@@ -14,6 +14,7 @@ import 'package:flutter/widgets.dart';
 import 'package:agaol/homeWidget.dart';
 import 'package:agaol/profileWidget.dart';
 
+
 void main() => runApp(MaterialApp(
 initialRoute: '/auth',
 routes: {
