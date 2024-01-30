@@ -14,6 +14,7 @@ import 'package:agaol/homeWidget.dart';
 import 'package:agaol/profileWidget.dart';
 
 void main() => runApp(MaterialApp(
+
   initialRoute: '/loading',
   routes: {
     '/loading': (context) => LoadingWidget(),
