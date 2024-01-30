@@ -1,6 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-
 import 'package:agaol/Auth/authWrapper.dart';
 import 'package:agaol/addWidget.dart';
 import 'package:agaol/likedWidget.dart';
@@ -15,31 +12,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:agaol/homeWidget.dart';
 import 'package:agaol/profileWidget.dart';
-import 'package:provider/provider.dart';
 
-import 'Auth/authService.dart';
 import 'firebase_options.dart';
-
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
-  runApp(MaterialApp(
-    home: EntryWidget(),
-  ));
-}
-
-class EntryWidget extends StatelessWidget {
-  EntryWidget({super.key});
-
-  final AuthService _auth = AuthService();
+class AppWidget extends StatefulWidget {
+  AppWidget({super.key});
 
   @override
+  State<AppWidget> createState() => _AppWidgetState();
+}
+
+class _AppWidgetState extends State<AppWidget> {
+  @override
   Widget build(BuildContext context) {
-    return StreamProvider.value(value: _auth.user, initialData: null,
-      child: WrapperWidget(),
+    return MaterialApp(
+      initialRoute: '/home',
+      routes: {
+        '/loading': (context) => LoadingWidget(),
+        '/home': (context) => HomeWidget(),
+        '/profile': (context) => ProfileWidget(),
+        '/add' : (context) => AddWidget(),
+        '/search' : (context) => SearchWidget(),
+        '/settings' : (context) => SettingsWidget(),
+        '/liked' : (context) => LikedWidget(),
+        '/messages' : (context) => MessagesWidget(),
+      },
     );
   }
 }
-
-

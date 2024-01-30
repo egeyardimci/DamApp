@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 class RegisterWidget extends StatefulWidget {
-  const RegisterWidget({super.key});
+
+  final Function(int) updateAuthState;
+  const RegisterWidget({super.key, required this.updateAuthState});
 
   @override
   State<RegisterWidget> createState() => _RegisterWidgetState();
@@ -17,10 +19,16 @@ class _RegisterWidgetState extends State<RegisterWidget> {
         title: Text('REGISTER TO DAM',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 20, // Customize font size
-              fontWeight: FontWeight.bold, // Customize font weight
-              fontFamily: 'Roboto', // Customize font family
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Roboto',
             )
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            widget.updateAuthState(0);
+          },
         ),
       ),
       body: Column(
@@ -160,21 +168,21 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           ),
         ],
       ),
-        bottomNavigationBar: BottomAppBar(
-              child: Container(
-                height: 50,
-                padding: EdgeInsets.symmetric(),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                  'Continue',
-                  style: TextStyle(
-                  fontSize: 18,
-                ),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 50,
+          padding: EdgeInsets.symmetric(),
+          child: ElevatedButton(
+            onPressed: () {},
+            child: Text(
+              'Continue',
+              style: TextStyle(
+                fontSize: 18,
               ),
             ),
           ),
         ),
+      ),
     );
   }
 }
