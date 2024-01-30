@@ -18,15 +18,11 @@ class _LoadingWidgetState extends State<LoadingWidget> {
    @override
    void initState(){
      super.initState();
-     Future.delayed(Duration.zero, () {
-       Navigator.pushReplacementNamed(context, "/home");
-     });
    }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: DecoratedBox(
+    return DecoratedBox(
         decoration: BoxDecoration(
             color: Colors.white
         ),
@@ -35,8 +31,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
 
           size: 50.0,
         ),
-      ),
-    );;
+    );
   }
 
 

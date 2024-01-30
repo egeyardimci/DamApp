@@ -17,9 +17,9 @@ class _LoginWidgetState extends State<LoginWidget> {
         backgroundColor: Colors.red,
         elevation: 0.0,
         title: Text('LOGIN',
-        style: TextStyle(
-            color: Colors.white
-          )
+            style: TextStyle(
+                color: Colors.white
+            )
         ),
       ),
       body: Column(
