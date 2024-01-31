@@ -4,7 +4,7 @@
 import 'package:agaol/Auth/authWrapper.dart';
 import 'package:agaol/App/addWidget.dart';
 import 'package:agaol/App/likedWidget.dart';
-import 'package:agaol/loading.dart';
+import 'package:agaol/loadingWidget.dart';
 import 'package:agaol/App/messagesWidget.dart';
 import 'package:agaol/App/searchWidget.dart';
 import 'package:agaol/App/settingsWidget.dart';

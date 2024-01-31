@@ -1,6 +1,6 @@
 import 'package:agaol/Auth/loginWidget.dart';
 import 'package:agaol/Auth/registerWidget.dart';
-import 'package:agaol/loading.dart';
+import 'package:agaol/loadingWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:agaol/Auth/authService.dart';
