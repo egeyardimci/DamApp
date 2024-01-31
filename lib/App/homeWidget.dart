@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:agaol/bottomBarWidget.dart';
-import 'package:agaol/requestCardWidget.dart';
-import 'package:agaol/topBarWidget.dart';
+import 'package:agaol/App/bottomBarWidget.dart';
+import 'package:agaol/App/requestCardWidget.dart';
+import 'package:agaol/App/topBarWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

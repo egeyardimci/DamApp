@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:agaol/bottomBarWidget.dart';
-import 'package:agaol/topBarWidget.dart';
+import 'package:agaol/App/bottomBarWidget.dart';
+import 'package:agaol/App/topBarWidget.dart';
 
 
 class MessagesWidget extends StatefulWidget {

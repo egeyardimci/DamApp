@@ -1,6 +1,6 @@
 import 'package:agaol/Auth/authService.dart';
 import 'package:agaol/Auth/authWrapper.dart';
-import 'package:agaol/app.dart';
+import 'package:agaol/App/app.dart';
 import 'package:flutter/material.dart';
 import "package:provider/provider.dart";
 

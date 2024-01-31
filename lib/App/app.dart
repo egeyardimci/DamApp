@@ -1,19 +1,19 @@
 import 'package:agaol/Auth/authWrapper.dart';
-import 'package:agaol/addWidget.dart';
-import 'package:agaol/likedWidget.dart';
+import 'package:agaol/App/addWidget.dart';
+import 'package:agaol/App/likedWidget.dart';
 import 'package:agaol/loading.dart';
-import 'package:agaol/messagesWidget.dart';
-import 'package:agaol/searchWidget.dart';
-import 'package:agaol/settingsWidget.dart';
+import 'package:agaol/App/messagesWidget.dart';
+import 'package:agaol/App/searchWidget.dart';
+import 'package:agaol/App/settingsWidget.dart';
 import 'package:agaol/wrapperWidget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:agaol/homeWidget.dart';
-import 'package:agaol/profileWidget.dart';
+import 'package:agaol/App/homeWidget.dart';
+import 'package:agaol/App/profileWidget.dart';
 
-import 'firebase_options.dart';
+import '../firebase_options.dart';
 class AppWidget extends StatefulWidget {
   AppWidget({super.key});
 

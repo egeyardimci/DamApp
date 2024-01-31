@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:agaol/bottomBarWidget.dart';
-import 'package:agaol/topBarWidget.dart';
-
-class AddWidget extends StatefulWidget {
-  AddWidget({super.key});
+import 'package:agaol/App/bottomBarWidget.dart';
+import 'package:agaol/App/topBarWidget.dart';
+class SearchWidget extends StatefulWidget {
+  const SearchWidget({super.key});
 
   @override
-  State<AddWidget> createState() => _AddWidgetState();
+  State<SearchWidget> createState() => _SearchWidgetState();
 }
 
-class _AddWidgetState extends State<AddWidget> {
+class _SearchWidgetState extends State<SearchWidget> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,21 +29,17 @@ class _AddWidgetState extends State<AddWidget> {
                   ),
                   children: <Widget>[
                     ListTile(
-                      title: Text("Male"),
+                      title: Text("Option 1"),
                       onTap: () {},
                     ),
                     ListTile(
-                      title: Text("Female"),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      title: Text("Other"),
+                      title: Text("Option 2"),
                       onTap: () {},
                     ),
                   ],
                 ),
               ),
-            ),
+           ),
             Card(
               child: Padding(
                 padding: EdgeInsets.symmetric(),
@@ -54,15 +50,11 @@ class _AddWidgetState extends State<AddWidget> {
                   ),
                   children: <Widget>[
                     ListTile(
-                      title: Text("Split"),
+                      title: Text("Option 1"),
                       onTap: () {},
                     ),
                     ListTile(
-                      title: Text("I will pay"),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      title: Text("Date will pay"),
+                      title: Text("Option 2"),
                       onTap: () {},
                     ),
                   ],
@@ -85,10 +77,20 @@ class _AddWidgetState extends State<AddWidget> {
                           TextFormField(
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: 'Age',
+                              labelText: 'Lowest',
                             ),
                             onChanged: (value) {
                               // Handle the minimum age input value
+                            },
+                          ),
+                          SizedBox(height: 8.0), // Add some space between text fields
+                          TextFormField(
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: 'Highest',
+                            ),
+                            onChanged: (value) {
+                              // Handle the maximum age input value
                             },
                           ),
                         ],
@@ -103,45 +105,7 @@ class _AddWidgetState extends State<AddWidget> {
                 padding: EdgeInsets.symmetric(),
                 child: ExpansionTile(
                   title: ListTile(
-                    leading: Icon(Icons.date_range),
-                    title: Text("Date"),
-                  ),
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              labelText: 'Exact Date',
-                            ),
-                            onChanged: (value) {
-                              // Handle the minimum age input value
-                            },
-                          ),
-                          TextFormField(
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              labelText: 'Time',
-                            ),
-                            onChanged: (value) {
-                              // Handle the minimum age input value
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              child: Padding(
-                padding: EdgeInsets.symmetric(),
-                child: ExpansionTile(
-                  title: ListTile(
-                    leading: Icon(Icons.location_on),
+                    leading: Icon(Icons.location_on_sharp),
                     title: Text("Location"),
                   ),
                   children: <Widget>[
@@ -150,44 +114,12 @@ class _AddWidgetState extends State<AddWidget> {
                       child: Column(
                         children: [
                           TextFormField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.streetAddress,
                             decoration: InputDecoration(
-                              labelText: 'Location',
+                              labelText: 'Enter Location',
                             ),
                             onChanged: (value) {
-                              // Handle the minimum age input value
                             },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              child: Padding(
-                padding: EdgeInsets.symmetric(),
-                child: ExpansionTile(
-                  title: ListTile(
-                    leading: Icon(Icons.photo),
-                    title: Text("Photo"),
-                  ),
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton.icon(
-                                onPressed: () {},
-                                icon: Icon(Icons.add),
-                                label: Text('Add Photo'),
-                              ),
-                              SizedBox(height: 8)
-                            ],
                           ),
                         ],
                       ),
@@ -198,8 +130,8 @@ class _AddWidgetState extends State<AddWidget> {
             ),
             ElevatedButton.icon(
               onPressed: () {},
-              icon: Icon(Icons.add),
-              label: Text('Add Dam Request'),
+              icon: Icon(Icons.search),
+              label: Text('Update filters to search...'),
             )
           ],
         ),

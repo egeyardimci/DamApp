@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:agaol/bottomBarWidget.dart';
-import 'package:agaol/topBarWidget.dart';
-class SearchWidget extends StatefulWidget {
-  const SearchWidget({super.key});
+import 'package:agaol/App/bottomBarWidget.dart';
+import 'package:agaol/App/topBarWidget.dart';
+
+class AddWidget extends StatefulWidget {
+  AddWidget({super.key});
 
   @override
-  State<SearchWidget> createState() => _SearchWidgetState();
+  State<AddWidget> createState() => _AddWidgetState();
 }
 
-class _SearchWidgetState extends State<SearchWidget> {
-
+class _AddWidgetState extends State<AddWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,17 +29,21 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ),
                   children: <Widget>[
                     ListTile(
-                      title: Text("Option 1"),
+                      title: Text("Male"),
                       onTap: () {},
                     ),
                     ListTile(
-                      title: Text("Option 2"),
+                      title: Text("Female"),
+                      onTap: () {},
+                    ),
+                    ListTile(
+                      title: Text("Other"),
                       onTap: () {},
                     ),
                   ],
                 ),
               ),
-           ),
+            ),
             Card(
               child: Padding(
                 padding: EdgeInsets.symmetric(),
@@ -50,11 +54,15 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ),
                   children: <Widget>[
                     ListTile(
-                      title: Text("Option 1"),
+                      title: Text("Split"),
                       onTap: () {},
                     ),
                     ListTile(
-                      title: Text("Option 2"),
+                      title: Text("I will pay"),
+                      onTap: () {},
+                    ),
+                    ListTile(
+                      title: Text("Date will pay"),
                       onTap: () {},
                     ),
                   ],
@@ -77,20 +85,10 @@ class _SearchWidgetState extends State<SearchWidget> {
                           TextFormField(
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: 'Lowest',
+                              labelText: 'Age',
                             ),
                             onChanged: (value) {
                               // Handle the minimum age input value
-                            },
-                          ),
-                          SizedBox(height: 8.0), // Add some space between text fields
-                          TextFormField(
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              labelText: 'Highest',
-                            ),
-                            onChanged: (value) {
-                              // Handle the maximum age input value
                             },
                           ),
                         ],
@@ -105,7 +103,45 @@ class _SearchWidgetState extends State<SearchWidget> {
                 padding: EdgeInsets.symmetric(),
                 child: ExpansionTile(
                   title: ListTile(
-                    leading: Icon(Icons.location_on_sharp),
+                    leading: Icon(Icons.date_range),
+                    title: Text("Date"),
+                  ),
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: 'Exact Date',
+                            ),
+                            onChanged: (value) {
+                              // Handle the minimum age input value
+                            },
+                          ),
+                          TextFormField(
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: 'Time',
+                            ),
+                            onChanged: (value) {
+                              // Handle the minimum age input value
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              child: Padding(
+                padding: EdgeInsets.symmetric(),
+                child: ExpansionTile(
+                  title: ListTile(
+                    leading: Icon(Icons.location_on),
                     title: Text("Location"),
                   ),
                   children: <Widget>[
@@ -114,12 +150,44 @@ class _SearchWidgetState extends State<SearchWidget> {
                       child: Column(
                         children: [
                           TextFormField(
-                            keyboardType: TextInputType.streetAddress,
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: 'Enter Location',
+                              labelText: 'Location',
                             ),
                             onChanged: (value) {
+                              // Handle the minimum age input value
                             },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              child: Padding(
+                padding: EdgeInsets.symmetric(),
+                child: ExpansionTile(
+                  title: ListTile(
+                    leading: Icon(Icons.photo),
+                    title: Text("Photo"),
+                  ),
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton.icon(
+                                onPressed: () {},
+                                icon: Icon(Icons.add),
+                                label: Text('Add Photo'),
+                              ),
+                              SizedBox(height: 8)
+                            ],
                           ),
                         ],
                       ),
@@ -130,8 +198,8 @@ class _SearchWidgetState extends State<SearchWidget> {
             ),
             ElevatedButton.icon(
               onPressed: () {},
-              icon: Icon(Icons.search),
-              label: Text('Update filters to search...'),
+              icon: Icon(Icons.add),
+              label: Text('Add Dam Request'),
             )
           ],
         ),

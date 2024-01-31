@@ -16,12 +16,11 @@ class _RegisterWidgetState extends State<RegisterWidget> {
       appBar: AppBar(
         backgroundColor: Colors.red,
         elevation: 0.0,
-        title: Text('REGISTER TO DAM',
+        title: Text('DamAPP Register Form',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              fontFamily: 'Roboto',
             )
         ),
         leading: IconButton(

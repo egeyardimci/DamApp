@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 class myUser{
@@ -25,17 +26,50 @@ class AuthService{
     }
   }
 
-  Future<UserCredential> signInAnon() async{
-    UserCredential fb_user = await _auth.signInAnonymously();
-    return fb_user;
+  Future<User?> signInAnon() async{
+    try {
+      UserCredential fb_user = await _auth.signInAnonymously();
+      return fb_user.user;
+    }catch(e){
+      return null;
+    }
+  }
+
+  Future<User?> createUserWithEmailAndPassword (String email, String password) async {
+    try {
+      UserCredential fb_user = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User? user = fb_user.user;
+      return user;
+    }catch(e){
+      return null;
+    }
+  }
+
+  Future<User?> signInWithEmailAndPassword (String email,String password) async{
+      try {
+        UserCredential fb_user = await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        User? user = fb_user.user;
+        return user;
+      }catch(e){
+        return null;
+      }
+
+
   }
 
   Stream<myUser?> get user{
     return _auth.authStateChanges().map((User? user) => convertUser(user));
   }
 
-  Future<void> signOut(){
-    return _auth.signOut();
+  Future<void>? signOut(){
+    try {
+      return _auth.signOut();
+    }catch(e){
+      print("Error Signin Out!");
+      return null;
+    }
   }
 
 }

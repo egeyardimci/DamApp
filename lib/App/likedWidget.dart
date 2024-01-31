@@ -1,9 +1,9 @@
-import 'package:agaol/profileCardWidget.dart';
-import 'package:agaol/profileWidget.dart';
-import 'package:agaol/requestCardWidget.dart';
+import 'package:agaol/App/profileCardWidget.dart';
+import 'package:agaol/App/profileWidget.dart';
+import 'package:agaol/App/requestCardWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:agaol/bottomBarWidget.dart';
-import 'package:agaol/topBarWidget.dart';
+import 'package:agaol/App/bottomBarWidget.dart';
+import 'package:agaol/App/topBarWidget.dart';
 
 
 class LikedWidget extends StatelessWidget {
