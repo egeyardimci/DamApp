@@ -44,7 +44,7 @@ void initState() {
       appBar: AppBar(
         backgroundColor: Colors.red,
         elevation: 0.0,
-        title: Text('DamAPP',
+        title: Text('DamApp',
             style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold

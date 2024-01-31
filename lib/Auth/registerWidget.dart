@@ -16,7 +16,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
       appBar: AppBar(
         backgroundColor: Colors.red,
         elevation: 0.0,
-        title: Text('DamAPP Register Form',
+        title: Text('DamApp Register Form',
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
