@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'authService.dart';
 
@@ -56,6 +58,11 @@ void initState() {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+                child: Image(image: AssetImage("assets/damlogo.png")),
+              width: 200,
+              height: 200,
+            ),
             Card(
               child: Center(
                 child: Padding(
