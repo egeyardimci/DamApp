@@ -59,8 +59,8 @@ class AuthService{
 
   }
 
-  Stream<myUser?> get user{
-    return _auth.authStateChanges().map((User? user) => convertUser(user));
+  Stream<User?> get user{
+    return _auth.authStateChanges();
   }
 
   Future<void>? signOut(){
