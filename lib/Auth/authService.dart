@@ -1,4 +1,4 @@
-
+import 'package:agaol/Database/userDatabase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class myUser{
@@ -35,13 +35,20 @@ class AuthService{
     }
   }
 
-  Future<User?> createUserWithEmailAndPassword (String email, String password) async {
+  Future<myUser?> createUserWithEmailAndPassword (String email, String password,
+      Map<String, dynamic> userInfoMap) async {
     try {
+      //Create new user
       UserCredential fb_user = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = fb_user.user;
-      return user;
-    }catch(e){
+
+      //Update the user data with taken user information
+      await userDatabase(uid: user!.uid).updateUserData(userInfoMap);
+      return convertUser(user);
+    }
+    catch(e){
+      print(e.toString());
       return null;
     }
   }

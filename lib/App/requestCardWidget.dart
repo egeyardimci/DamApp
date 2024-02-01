@@ -42,7 +42,7 @@ class RequestCardWidget extends StatelessWidget {
                             borderRadius: BorderRadius.zero
                           ),
                           child: Image(
-                            image: AssetImage("assets/foto.jpeg"),
+                            image: AssetImage("assets/paul_mescal.jpg"),
                           ),
                         ),
                       ),
