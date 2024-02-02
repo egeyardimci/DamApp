@@ -53,97 +53,99 @@ void initState() {
             )
         ),
       ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                  child: Image(image: AssetImage("assets/damlogo.png")),
-                width: 200,
-                height: 200,
-              ),
-              Card(
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                    child: Image(image: AssetImage("assets/damlogo.png")),
+                  width: 200,
+                  height: 200,
+                ),
+                Card(
+                  child: Center(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              labelText: 'Enter Mail',
+                      padding: EdgeInsets.symmetric(),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                labelText: 'Enter Mail',
+                              ),
+                              controller: _emailController,
+                              validator: (value){
+                                if (value!.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                if((!value.contains("@")) || (!value.contains("."))){
+                                  return "Please enter a valid email adress";
+                                }
+                                return null;
+                              },
                             ),
-                            controller: _emailController,
-                            validator: (value){
-                              if (value!.isEmpty) {
-                                return 'Please enter your email';
-                              }
-                              if((!value.contains("@")) || (!value.contains("."))){
-                                return "Please enter a valid email adress";
-                              }
-                              return null;
-                            },
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Card(
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(),
+                Card(
+                  child: Center(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            obscureText: true,
-                            keyboardType: TextInputType.visiblePassword,
-                            decoration: InputDecoration(
-                              labelText: 'Enter Password',
+                      padding: EdgeInsets.symmetric(),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              obscureText: true,
+                              keyboardType: TextInputType.visiblePassword,
+                              decoration: InputDecoration(
+                                labelText: 'Enter Password',
+                              ),
+                              controller: _passwordController,
+                              validator: (value){
+                                if (value!.isEmpty) {
+                                  return 'Please enter your password';
+                                }
+                                if((value.length<6)){
+                                  return 'Please make a sure that your password is longer than 6 characters';
+                                }
+                                return null;
+                              },
                             ),
-                            controller: _passwordController,
-                            validator: (value){
-                              if (value!.isEmpty) {
-                                return 'Please enter your password';
-                              }
-                              if((value.length<6)){
-                                return 'Please make a sure that your password is longer than 6 characters';
-                              }
-                              return null;
-                            },
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 10.0),
-              Container(
-                height: 50,
-                padding: EdgeInsets.symmetric(),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    if(_formKey.currentState!.validate()) {
-                      _validateSignForm();
-                    }
-                  },
-                  child: Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 18,
+                SizedBox(height: 10.0),
+                Container(
+                  height: 50,
+                  padding: EdgeInsets.symmetric(),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if(_formKey.currentState!.validate()) {
+                        _validateSignForm();
+                      }
+                    },
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
