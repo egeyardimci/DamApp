@@ -35,7 +35,7 @@ class AuthService{
     }
   }
 
-  Future<myUser?> createUserWithEmailAndPassword (String email, String password,
+  Future<User?> createUserWithEmailAndPassword (String email, String password,
       Map<String, dynamic> userInfoMap) async {
     try {
       //Create new user
@@ -45,7 +45,7 @@ class AuthService{
 
       //Update the user data with taken user information
       await userDatabase(uid: user!.uid).updateUserData(userInfoMap);
-      return convertUser(user);
+      return user;
     }
     catch(e){
       print(e.toString());
