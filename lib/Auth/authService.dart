@@ -1,5 +1,7 @@
+import 'package:agaol/Database/requestDatabase.dart';
 import 'package:agaol/Database/userDatabase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:agaol/Database/requestDatabase.dart';
 
 class myUser{
   String displayName = "";
@@ -58,6 +60,8 @@ class AuthService{
         UserCredential fb_user = await _auth.signInWithEmailAndPassword(
             email: email, password: password);
         User? user = fb_user.user;
+
+        await requestDatabase().updateRequestData();
         return user;
       }catch(e){
         return null;
