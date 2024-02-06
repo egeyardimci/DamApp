@@ -11,10 +11,10 @@ class requestDatabase {
       .collection("requests");
 
   //Updates user's data
-  Future updateRequestData() async {
+  Future<void> updateRequestData() async {
 
     //Update the user collection in database
-    return await userCollection.add({
+    await userCollection.add({
       'uid': "alas",
       'time': "12.12",
       'whopays': "ben",
@@ -23,5 +23,6 @@ class requestDatabase {
       'acceptedby': ["s","sd"],
       'declinedby': ["ssdf","sd"],
     });
+
   }
 }

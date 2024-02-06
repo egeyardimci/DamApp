@@ -22,17 +22,15 @@ class _LoadingWidgetState extends State<LoadingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: DecoratedBox(
-          decoration: BoxDecoration(
-              color: Colors.white
-          ),
-          child: SpinKitPumpingHeart(
-            color: Colors.red,
-      
-            size: 50.0,
-          ),
-      ),
+    return DecoratedBox(
+        decoration: BoxDecoration(
+            color: Colors.white
+        ),
+        child: SpinKitPumpingHeart(
+          color: Colors.red,
+
+          size: 50.0,
+        ),
     );
   }
 
