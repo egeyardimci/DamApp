@@ -1,6 +1,7 @@
 import 'package:agaol/Auth/authService.dart';
 import 'package:agaol/Auth/authWrapper.dart';
 import 'package:agaol/App/app.dart';
+import 'package:agaol/Database/userDatabase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:provider/provider.dart";
@@ -18,8 +19,8 @@ class _WrapperWidgetState extends State<WrapperWidget> {
 
     final User? user = Provider.of<User?>(context);
 
-    if(user == null){
 
+    if(user == null){
       return AuthWrapper();
     }
     else{

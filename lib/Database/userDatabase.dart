@@ -1,4 +1,6 @@
+import 'package:agaol/Auth/authService.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class userDatabase {
 
@@ -22,4 +24,10 @@ class userDatabase {
       'preference': userInfoMap['preference'],
     });
   }
+
+  Future<DocumentSnapshot>? get currentUser async {
+    DocumentSnapshot snapshot = await userCollection.doc(uid).get();
+    return snapshot;
+  }
+
 }

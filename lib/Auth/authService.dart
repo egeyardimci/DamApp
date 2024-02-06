@@ -70,6 +70,11 @@ class AuthService{
     return _auth.authStateChanges();
   }
 
+  User? get currentUser{
+    return _auth.currentUser;
+  }
+
+
   Future<void>? signOut(){
     try {
       return _auth.signOut();
