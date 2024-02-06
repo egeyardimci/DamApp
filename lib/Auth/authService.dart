@@ -1,32 +1,14 @@
 import 'package:agaol/Database/requestDatabase.dart';
 import 'package:agaol/Database/userDatabase.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:agaol/Database/requestDatabase.dart';
 
-class myUser{
-  String displayName = "";
 
-  myUser(dynamic name){
-    if(name == null){
-      displayName = "";
-    }
-    else{
-      displayName = name;
-    }
-  }
-}
 
 class AuthService{
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  myUser? convertUser(User? user){
-    if(user == null){
-      return null;
-    }
-    else {
-      return myUser(user.displayName);
-    }
-  }
 
   Future<User?> signInAnon() async{
     try {

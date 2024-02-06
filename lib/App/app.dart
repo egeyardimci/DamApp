@@ -1,6 +1,7 @@
 import 'package:agaol/Auth/authWrapper.dart';
 import 'package:agaol/App/addWidget.dart';
 import 'package:agaol/App/likedWidget.dart';
+import 'package:agaol/Models/userModel.dart';
 import 'package:agaol/loadingWidget.dart';
 import 'package:agaol/App/messagesWidget.dart';
 import 'package:agaol/App/searchWidget.dart';
@@ -36,7 +37,7 @@ class _AppWidgetState extends State<AppWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final User? user = Provider.of<User?>(context);
+    final myUser? user = Provider.of<myUser?>(context);
     return MaterialApp(
       initialRoute: '/home',
       routes: {

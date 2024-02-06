@@ -25,6 +25,13 @@ class userDatabase {
     });
   }
 
+  Future updateSingleUserData(String attributeName, String attributeValue) async {
+
+    return await userCollection.doc(uid).update({
+      attributeName: attributeValue,
+    });
+  }
+
   Future<DocumentSnapshot>? get currentUser async {
     DocumentSnapshot snapshot = await userCollection.doc(uid).get();
     return snapshot;

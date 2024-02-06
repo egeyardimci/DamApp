@@ -2,6 +2,8 @@ import 'package:agaol/Auth/authService.dart';
 import 'package:agaol/Auth/authWrapper.dart';
 import 'package:agaol/App/app.dart';
 import 'package:agaol/Database/userDatabase.dart';
+import 'package:agaol/Models/userModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:provider/provider.dart";
@@ -24,7 +26,16 @@ class _WrapperWidgetState extends State<WrapperWidget> {
       return AuthWrapper();
     }
     else{
-      return AppWidget();
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => myUserProvider()),
+          FutureProvider<myUser?>(
+            create: (context) => context.read<myUserProvider>().setUser(),
+            initialData: null,
+          ),
+        ],
+        child: AppWidget(),
+      );
     }
   }
 }

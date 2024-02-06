@@ -1,5 +1,6 @@
 import 'package:agaol/App/profileCardWidget.dart';
 import 'package:agaol/Database/userDatabase.dart';
+import 'package:agaol/Models/userModel.dart';
 import 'package:agaol/loadingWidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,11 +38,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       backgroundColor: Colors.white,
       appBar: TopBarWidget(title: "DamApp",),
       bottomNavigationBar: BottomBarWidget(),
-      body: FutureBuilder<DocumentSnapshot>(
-        future: userDatabase(uid: _uid).currentUser,
-        initialData: null,
-        builder:(context,snapshot) {
-          if(!snapshot.hasData){
+      body: Consumer<myUserProvider>(
+        builder:(context,_user,child) {
+          print(_user.currentUser);
+          if(_user.currentUser == null){
             return LoadingWidget();
           }
           return Padding(
@@ -67,7 +67,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${snapshot.data?["name"]}",
+                          "${_user.currentUser?.name}",
                           style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
@@ -75,14 +75,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         ),
                         SizedBox(height: 8.0),
                         Text(
-                          "${snapshot.data?["gender"]}, ${snapshot.data?["age"]}",
+                          "${_user.currentUser?.gender}, ${_user.currentUser?.age}",
                           style: TextStyle(
                             fontSize: 18.0,
                             color: Colors.grey[800],
                           ),
                         ),
                         Text(
-                          "Preferred: ${snapshot.data?["preference"]}",
+                          "Preferred: ${_user.currentUser?.preference}",
                           style: TextStyle(
                             fontSize: 18.0,
                             color: Colors.grey[800],

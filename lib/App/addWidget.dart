@@ -1,17 +1,28 @@
+import 'package:agaol/Database/requestDatabase.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:agaol/App/bottomBarWidget.dart';
 import 'package:agaol/App/topBarWidget.dart';
+import 'package:provider/provider.dart';
 
 class AddWidget extends StatefulWidget {
   AddWidget({super.key});
 
   @override
   State<AddWidget> createState() => _AddWidgetState();
+
+  String preference = "";
+  String share = "";
+  String age = "";
+  String date = "";
+  String location = "";
+  String time = "";
 }
 
 class _AddWidgetState extends State<AddWidget> {
   @override
   Widget build(BuildContext context) {
+    final User? user = Provider.of<User?>(context);
     return Scaffold(
       appBar: TopBarWidget(title: 'DamApp',),
       bottomNavigationBar: BottomBarWidget(),
@@ -30,15 +41,21 @@ class _AddWidgetState extends State<AddWidget> {
                   children: <Widget>[
                     ListTile(
                       title: Text("Male"),
-                      onTap: () {},
+                      onTap: () {
+                        widget.preference = "Male";
+                      },
                     ),
                     ListTile(
                       title: Text("Female"),
-                      onTap: () {},
+                      onTap: () {
+                        widget.preference = "Female";
+                      },
                     ),
                     ListTile(
                       title: Text("Other"),
-                      onTap: () {},
+                      onTap: () {
+                        widget.preference = "Other";
+                      },
                     ),
                   ],
                 ),
@@ -55,15 +72,21 @@ class _AddWidgetState extends State<AddWidget> {
                   children: <Widget>[
                     ListTile(
                       title: Text("Split"),
-                      onTap: () {},
+                      onTap: () {
+                        widget.share = "Split";
+                      },
                     ),
                     ListTile(
                       title: Text("I will pay"),
-                      onTap: () {},
+                      onTap: () {
+                        widget.share = "I will pay";
+                      },
                     ),
                     ListTile(
                       title: Text("Date will pay"),
-                      onTap: () {},
+                      onTap: () {
+                        widget.share = "Date will pay";
+                      },
                     ),
                   ],
                 ),
@@ -83,12 +106,12 @@ class _AddWidgetState extends State<AddWidget> {
                       child: Column(
                         children: [
                           TextFormField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               labelText: 'Age',
                             ),
                             onChanged: (value) {
-                              // Handle the minimum age input value
+                              widget.age = value;
                             },
                           ),
                         ],
@@ -112,21 +135,21 @@ class _AddWidgetState extends State<AddWidget> {
                       child: Column(
                         children: [
                           TextFormField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               labelText: 'Exact Date',
                             ),
                             onChanged: (value) {
-                              // Handle the minimum age input value
+                              widget.date = value;
                             },
                           ),
                           TextFormField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               labelText: 'Time',
                             ),
                             onChanged: (value) {
-                              // Handle the minimum age input value
+                              widget.time = value;
                             },
                           ),
                         ],
@@ -150,12 +173,12 @@ class _AddWidgetState extends State<AddWidget> {
                       child: Column(
                         children: [
                           TextFormField(
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               labelText: 'Location',
                             ),
                             onChanged: (value) {
-                              // Handle the minimum age input value
+                              widget.location = value;
                             },
                           ),
                         ],
@@ -197,7 +220,8 @@ class _AddWidgetState extends State<AddWidget> {
               ),
             ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+              },
               icon: Icon(Icons.add),
               label: Text('Add Dam Request'),
             )
