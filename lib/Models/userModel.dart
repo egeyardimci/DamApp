@@ -31,6 +31,7 @@ class myUserProvider with ChangeNotifier {
   }
 
   Future<myUser?> setUser () async{
+    print("saga");
     DocumentSnapshot<Object?>? snapshot = await userDatabase(uid: authService.currentUser!.uid).currentUser;
     Map<String, dynamic>? map = snapshot?.data() as Map<String, dynamic>?;
 

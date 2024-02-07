@@ -19,6 +19,7 @@ import 'package:agaol/App/profileWidget.dart';
 import 'package:provider/provider.dart';
 
 import '../Database/userDatabase.dart';
+import '../Models/requestModel.dart';
 import '../firebase_options.dart';
 class AppWidget extends StatefulWidget {
   AppWidget({super.key});

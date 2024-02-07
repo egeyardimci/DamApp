@@ -28,7 +28,7 @@ class requestDatabase {
     });
   }
 
-  Future<List> getRequests(int count) async {
+  Future<List<QueryDocumentSnapshot?>> getRequests(int count) async {
     //Update the user collection in database
     QuerySnapshot? snapshot = await requestCollection.limit(count).get();
     return snapshot.docs;

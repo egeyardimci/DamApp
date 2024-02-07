@@ -8,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:provider/provider.dart";
 
+import 'Models/requestModel.dart';
+
 class WrapperWidget extends StatefulWidget {
   WrapperWidget({super.key});
 
@@ -18,6 +20,7 @@ class WrapperWidget extends StatefulWidget {
 class _WrapperWidgetState extends State<WrapperWidget> {
   @override
   Widget build(BuildContext context) {
+
 
     final User? user = Provider.of<User?>(context);
 
@@ -31,6 +34,10 @@ class _WrapperWidgetState extends State<WrapperWidget> {
           ChangeNotifierProvider(create: (context) => myUserProvider()),
           FutureProvider<myUser?>(
             create: (context) => context.read<myUserProvider>().setUser(),
+            initialData: null,
+          ),
+          FutureProvider<List<myRequest>?>(
+            create: (_) => myRequestProvider().getRequests(),
             initialData: null,
           ),
         ],
