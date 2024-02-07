@@ -11,7 +11,7 @@ class MyRequestsWidget extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: TopBarWidget(title: 'DamApp',),
-      bottomNavigationBar: BottomBarWidget(currentindex: 4,),
+      bottomNavigationBar: BottomBarWidget(currentindex: 3,),
     );;
   }
 }

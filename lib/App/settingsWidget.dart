@@ -39,7 +39,16 @@ class _SettingsWidgetState extends State<SettingsWidget> {
     final User? user = Provider.of<User?>(context);
 
     return Scaffold(
-      appBar: TopBarWidget(title: 'DamApp',),
+      appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: Text(
+            "DamApp",
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+      ),
       body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

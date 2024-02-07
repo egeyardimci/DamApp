@@ -14,8 +14,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
     0 : "/home",
     1 : "/search",
     2 : "/add",
-    3 : "/profile",
-    4 : "/myrequests"
+    3 : "/myrequests",
+    4 : "/profile"
   };
 
 
@@ -50,15 +50,16 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
           label: 'Add',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
-        BottomNavigationBarItem(
 
           backgroundColor: Colors.amber,
           icon: Icon(Icons.mail),
           label: 'Requests',
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Profile',
+        ),
+
       ],
     );
   }

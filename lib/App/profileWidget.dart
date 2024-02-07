@@ -58,7 +58,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomBarWidget(currentindex: 3,),
+      bottomNavigationBar: BottomBarWidget(currentindex: 4,),
       body: Consumer<myUserProvider>(
         builder:(context,_user,child) {
           print(_user.currentUser);
