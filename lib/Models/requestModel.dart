@@ -25,7 +25,7 @@ class myRequestProvider with ChangeNotifier{
     print("EGE");
     List<myRequest> requestList = [];
 
-    List list = await requestDatabase().getRequests(2);
+    List list = await requestDatabase().getRequests(100);
 
 
     for(var i in list){
