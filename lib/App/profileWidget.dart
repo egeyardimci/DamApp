@@ -36,8 +36,29 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: TopBarWidget(title: "DamApp",),
-      bottomNavigationBar: BottomBarWidget(),
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: Text(
+          "DamApp",
+          style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold
+          ),
+        ),
+        actions: [
+          IconButton(
+
+            color: Colors.white,
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              // Add action for the settings button
+              Navigator.pushReplacementNamed(context, "/settings");
+            },
+
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomBarWidget(currentindex: 3,),
       body: Consumer<myUserProvider>(
         builder:(context,_user,child) {
           print(_user.currentUser);

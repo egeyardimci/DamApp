@@ -1,3 +1,4 @@
+import 'package:agaol/App/myRequestsWidget.dart';
 import 'package:agaol/Auth/authWrapper.dart';
 import 'package:agaol/App/addWidget.dart';
 import 'package:agaol/App/likedWidget.dart';
@@ -49,6 +50,7 @@ class _AppWidgetState extends State<AppWidget> {
         '/settings' : (context) => SettingsWidget(),
         '/liked' : (context) => LikedWidget(),
         '/messages' : (context) => MessagesWidget(),
+        '/myrequests' : (context) => MyRequestsWidget()
       },
     );
   }

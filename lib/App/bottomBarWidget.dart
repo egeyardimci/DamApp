@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 class BottomBarWidget extends StatefulWidget {
 
-  BottomBarWidget();
+  BottomBarWidget({required this.currentindex});
+  int currentindex;
 
   @override
   State<BottomBarWidget> createState() => _BottomBarWidgetState();
@@ -14,8 +15,10 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
     1 : "/search",
     2 : "/add",
     3 : "/profile",
-    4 : "/settings"
+    4 : "/myrequests"
   };
+
+
 
   void changeRoute(int index){
     String rootName = ModalRoute.of(context)!.settings.name!;
@@ -27,6 +30,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex: widget.currentindex,
       type: BottomNavigationBarType.fixed,
       onTap: (index) {
         changeRoute(index);
@@ -52,8 +56,8 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
         BottomNavigationBarItem(
 
           backgroundColor: Colors.amber,
-          icon: Icon(Icons.settings),
-          label: 'Settings',
+          icon: Icon(Icons.mail),
+          label: 'Requests',
         ),
       ],
     );

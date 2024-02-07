@@ -13,7 +13,7 @@ class LikedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBarWidget(title: 'DamApp',),
-      bottomNavigationBar: BottomBarWidget(),
+      bottomNavigationBar: BottomBarWidget(currentindex: 0,),
       body: SingleChildScrollView(
         child: Column(
           children: [

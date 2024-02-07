@@ -25,7 +25,7 @@ class _AddWidgetState extends State<AddWidget> {
     final User? user = Provider.of<User?>(context);
     return Scaffold(
       appBar: TopBarWidget(title: 'DamApp',),
-      bottomNavigationBar: BottomBarWidget(),
+      bottomNavigationBar: BottomBarWidget(currentindex: 2,),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

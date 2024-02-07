@@ -14,7 +14,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBarWidget(title: 'DamApp',),
-      bottomNavigationBar: BottomBarWidget(),
+      bottomNavigationBar: BottomBarWidget(currentindex: 1,),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

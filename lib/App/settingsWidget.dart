@@ -227,7 +227,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
 
           ]
       ),
-      bottomNavigationBar: BottomBarWidget(),
+      bottomNavigationBar: BottomBarWidget(currentindex: 0,),
     );
   }
 }

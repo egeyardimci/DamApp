@@ -20,7 +20,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
     return Scaffold(
       appBar: TopBarWidget(title: 'DamApp',),
-      bottomNavigationBar: BottomBarWidget(),
+      bottomNavigationBar: BottomBarWidget(currentindex: 0,),
       body: Column(
             children: [
               RequestCardWidget(name: "as",date: "Persembe",

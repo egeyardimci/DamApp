@@ -44,7 +44,7 @@ class _MessagesWidgetState extends State<MessagesWidget> {
         tooltip: 'Pick Image',
         child: Icon(Icons.add_a_photo),
       ),
-      bottomNavigationBar: BottomBarWidget(),
+      bottomNavigationBar: BottomBarWidget(currentindex: 0,),
     );
   }
 }
