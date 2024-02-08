@@ -37,13 +37,13 @@ class _HomeWidgetState extends State<HomeWidget> {
         body: Column(
           children: [
             RequestCardWidget(
-                name: requestData?[widget.currentRequest].name ?? "",
-                date: requestData?[widget.currentRequest].date ?? "",
-                time: requestData?[widget.currentRequest].time ?? "",
-                location: requestData?[widget.currentRequest].location ?? "",
-                lookingFor: requestData?[widget.currentRequest].preference ??
+                name: requestData[widget.currentRequest].name ?? "",
+                date: requestData[widget.currentRequest].date ?? "",
+                time: requestData[widget.currentRequest].time ?? "",
+                location: requestData[widget.currentRequest].location ?? "",
+                lookingFor: requestData[widget.currentRequest].preference ??
                     "",
-                whoPays: requestData?[widget.currentRequest].whopays ?? ""),
+                whoPays: requestData[widget.currentRequest].whopays ?? ""),
             Expanded(
               child: Container(
                 margin: EdgeInsets.fromLTRB(20, 40, 20, 40),

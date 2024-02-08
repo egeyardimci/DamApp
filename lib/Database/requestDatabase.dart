@@ -3,6 +3,8 @@ import 'package:agaol/Auth/authService.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../Models/requestModel.dart';
+
 class requestDatabase {
 
   //User is referred by uid
@@ -12,9 +14,9 @@ class requestDatabase {
       .collection("requests");
 
   //Updates user's data
-  Future<void> addNewRequest(name,uid,age,time,whopays,preference,location,date) async {
+  Future<DocumentReference> addNewRequest(name,uid,age,time,whopays,preference,location,date) async {
     //Update the user collection in database
-    await requestCollection.add({
+    return await requestCollection.add({
       'name' : name,
       'uid': uid,
       'time': time,
@@ -33,5 +35,6 @@ class requestDatabase {
     QuerySnapshot? snapshot = await requestCollection.limit(count).get();
     return snapshot.docs;
   }
+
 
 }

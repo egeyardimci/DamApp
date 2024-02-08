@@ -1,6 +1,8 @@
 import 'package:agaol/Auth/authService.dart';
+import 'package:agaol/Models/requestModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/rendering.dart';
 
 class userDatabase {
 
@@ -22,11 +24,29 @@ class userDatabase {
       'age': userInfoMap['age'],
       'gender': userInfoMap['gender'],
       'preference': userInfoMap['preference'],
+      'requests' : []
     });
   }
 
-  Future updateSingleUserData(String attributeName, String attributeValue) async {
+  Future updateRequestList(String? newRequestID) async {
 
+    List requestList = await getSingleUserData("requests");
+    requestList.add(newRequestID);
+
+    await userCollection.doc(uid).update({
+      'requests': requestList,
+    });
+  }
+
+  Future getSingleUserData(attributeName) async {
+    DocumentSnapshot<Object?>? snapshot = await currentUser;
+    Map<String, dynamic>? map = snapshot?.data() as Map<String, dynamic>?;
+
+    return map?[attributeName];
+  }
+
+
+  Future updateSingleUserData(String attributeName, String attributeValue) async {
     return await userCollection.doc(uid).update({
       attributeName: attributeValue,
     });

@@ -40,19 +40,27 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
     final myUser? user = Provider.of<myUser?>(context);
-    return MaterialApp(
-      initialRoute: '/home',
-      routes: {
-        '/loading': (context) => LoadingWidget(),
-        '/home': (context) => HomeWidget(),
-        '/profile': (context) => ProfileWidget(),
-        '/add' : (context) => AddWidget(),
-        '/search' : (context) => SearchWidget(),
-        '/settings' : (context) => SettingsWidget(),
-        '/liked' : (context) => LikedWidget(),
-        '/messages' : (context) => MessagesWidget(),
-        '/myrequests' : (context) => MyRequestsWidget()
-      },
+    return MultiProvider(
+      providers: [
+        FutureProvider<userRequestProvider?>(
+          create: (_) => userRequestProvider().setUserRequests(user?.requests),
+          initialData: null,
+        ),
+      ],
+      child: MaterialApp(
+        initialRoute: '/home',
+        routes: {
+          '/loading': (context) => LoadingWidget(),
+          '/home': (context) => HomeWidget(),
+          '/profile': (context) => ProfileWidget(),
+          '/add' : (context) => AddWidget(),
+          '/search' : (context) => SearchWidget(),
+          '/settings' : (context) => SettingsWidget(),
+          '/liked' : (context) => LikedWidget(),
+          '/messages' : (context) => MessagesWidget(),
+          '/myrequests' : (context) => MyRequestsWidget()
+        },
+      ),
     );
   }
 }

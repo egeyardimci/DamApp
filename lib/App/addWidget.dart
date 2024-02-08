@@ -1,4 +1,7 @@
+import 'package:agaol/Auth/authService.dart';
 import 'package:agaol/Database/requestDatabase.dart';
+import 'package:agaol/Database/userDatabase.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:agaol/App/bottomBarWidget.dart';
@@ -8,6 +11,8 @@ import 'package:agaol/Models/userModel.dart';
 import 'package:agaol/loadingWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+
+import '../Models/requestModel.dart';
 
 class AddWidget extends StatefulWidget {
   AddWidget({super.key});
@@ -186,10 +191,16 @@ class _AddWidgetState extends State<AddWidget> {
                       if(_formKey.currentState!.validate() ){
 
                         final requestDatabase newRequest = requestDatabase();
+                        final userDatabase userDatabaseRef = userDatabase(uid: AuthService().currentUser!.uid);
 
-                        await newRequest.addNewRequest(_user.currentUser?.name, _uid,
+                        DocumentReference newRequestDocument = await newRequest.addNewRequest(_user.currentUser?.name, _uid,
                             _user.currentUser?.age, time, whopays,
                             _user.currentUser?.preference, location ,date);
+
+                        String? newRequestID = newRequestDocument.id;
+                        await userDatabaseRef.updateRequestList(newRequestID);
+                        await _user.updateUserData();
+                        Provider.of<userRequestProvider>(context, listen: false).setUserRequests(_user.userobj?.requests);
 
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

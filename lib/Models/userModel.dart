@@ -11,9 +11,10 @@ class myUser{
   String? gender = "";
   String? preference = "";
   String? about = "";
+  List? requests = [];
 
   myUser({this.name,this.age,
-    this.gender, this.preference, this.about});
+    this.gender, this.preference, this.about,this.requests});
 
 }
 
@@ -26,7 +27,7 @@ class myUserProvider with ChangeNotifier {
 
   myUser? convertUser(Map<String, dynamic>? userdata){
     myUser? _user = myUser(name: userdata?["name"], age: userdata?["age"], gender: userdata?["gender"],
-        preference: userdata?["preference"], about: userdata?["about"]);
+        preference: userdata?["preference"], about: userdata?["about"],requests: userdata?["requests"]);
     return(_user);
   }
 
