@@ -12,9 +12,11 @@ class myUser{
   String? preference = "";
   String? about = "";
   List? requests = [];
+  List? likedrequests = [];
+  List? dislikedrequests= [];
 
   myUser({this.name,this.age,
-    this.gender, this.preference, this.about,this.requests});
+    this.gender, this.preference, this.about,this.requests,this.likedrequests,this.dislikedrequests});
 
 }
 
@@ -27,12 +29,12 @@ class myUserProvider with ChangeNotifier {
 
   myUser? convertUser(Map<String, dynamic>? userdata){
     myUser? _user = myUser(name: userdata?["name"], age: userdata?["age"], gender: userdata?["gender"],
-        preference: userdata?["preference"], about: userdata?["about"],requests: userdata?["requests"]);
+        preference: userdata?["preference"], about: userdata?["about"],requests: userdata?["requests"],
+        likedrequests: userdata?["likedrequests"], dislikedrequests: userdata?["dislikedrequests"]);
     return(_user);
   }
 
   Future<myUser?> setUser () async{
-    print("saga");
     DocumentSnapshot<Object?>? snapshot = await userDatabase(uid: authService.currentUser!.uid).currentUser;
     Map<String, dynamic>? map = snapshot?.data() as Map<String, dynamic>?;
 

@@ -36,5 +36,30 @@ class requestDatabase {
     return snapshot.docs;
   }
 
+  Future getSingleRequestData(requestID,attributeName) async {
+    DocumentSnapshot snapshot = await requestCollection.doc(requestID).get();
+    Map<String, dynamic>? map = snapshot.data() as Map<String, dynamic>?;
+
+    return map?[attributeName];
+  }
+
+  Future updateAcceptedList(String? requestID) async {
+
+    final String? uid = AuthService().currentUser?.uid;
+    List acceptedByList = await getSingleRequestData(requestID,"acceptedby");
+
+    if(acceptedByList.contains(uid)){ //already accepted remove it
+      acceptedByList.remove(uid);
+    }
+    else{ // not accepted
+      acceptedByList.add(uid);
+    }
+
+    await requestCollection.doc(requestID).update({
+      'acceptedby': acceptedByList,
+    });
+
+  }
+
 
 }

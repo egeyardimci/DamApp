@@ -25,7 +25,6 @@ class _LoginWidgetState extends State<LoginWidget> {
   void _validateSignForm() async{
     widget.updateAuthState(2);
     User? user = await _auth.signInWithEmailAndPassword(_emailController.text, _passwordController.text);
-    print(user);
     if(user == null){
       widget.updateAuthState(3);
     }
