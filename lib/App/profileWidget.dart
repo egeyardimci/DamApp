@@ -21,12 +21,7 @@ class ProfileWidget extends StatefulWidget {
 
 class _ProfileWidgetState extends State<ProfileWidget> {
 
-  String name = 'Paul Mescal';
-  String age = '27';
-  String gender = 'Male';
-  String preference = 'Female';
-  String about = 'Acting my way to top. Got BAFTA but still single. '
-      'Looking for someone to take to park. :)))';
+
 
 
   @override
@@ -117,12 +112,21 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(
-                          "age",
+                        SizedBox(height: 5.0),
+                        if(_user.currentUser?.about != null)
+                          Text(
+                          "${_user.currentUser?.about}",
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
                         ),
+                        if(_user.currentUser?.about == null)
+                          Text(
+                            "...",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                            ),
+                          ),
                       ],
                     ),
                   ),
