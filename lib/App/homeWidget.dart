@@ -61,7 +61,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             children: [
               RequestCardWidget(
                   name: requestData[widget.currentRequest].name ?? "",
-                  age: requestData[widget.currentRequest].name ?? "",
+                  age: requestData[widget.currentRequest].age ?? "",
                   date: requestData[widget.currentRequest].date ?? "",
                   time: requestData[widget.currentRequest].time ?? "",
                   location: requestData[widget.currentRequest].location ?? "",
