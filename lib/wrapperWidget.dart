@@ -3,6 +3,7 @@ import 'package:agaol/Auth/authWrapper.dart';
 import 'package:agaol/App/app.dart';
 import 'package:agaol/Database/userDatabase.dart';
 import 'package:agaol/Models/userModel.dart';
+import 'package:agaol/Providers/homeWidgetProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +37,8 @@ class _WrapperWidgetState extends State<WrapperWidget> {
             create: (context) => context.read<myUserProvider>().setUser(),
             initialData: null,
           ),
-          FutureProvider<List<myRequest>?>(
-            create: (_) => myRequestProvider().getRequests(),
+          FutureProvider<HomeWidgetProvider?>(
+            create: (_) => HomeWidgetProvider().refreshRequests(),
             initialData: null,
           ),
         ],

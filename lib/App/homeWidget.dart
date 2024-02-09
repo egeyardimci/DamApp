@@ -8,6 +8,7 @@ import 'package:agaol/Auth/authService.dart';
 import 'package:agaol/Database/requestDatabase.dart';
 import 'package:agaol/Database/userDatabase.dart';
 import 'package:agaol/Models/requestModel.dart';
+import 'package:agaol/Providers/homeWidgetProvider.dart';
 import 'package:agaol/loadingWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,8 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final List<myRequest>? requestData = Provider.of<List<myRequest>?>(context);
+    final dynamic _HomeWidgetProvider = Provider.of<HomeWidgetProvider?>(context);
+    final List<myRequest>? requestData = _HomeWidgetProvider?.requestList;
     if(requestData == null){
       return LoadingWidget();
     }
@@ -85,6 +87,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           icon: Icon(Icons.chevron_left),
                         ),
                         IconButton(onPressed: () async{
+
                           await userDataBaseRef.updateLikedRequestList(requestData[widget.currentRequest].requestid);
                           await requestDataBaseRef.updateAcceptedList(requestData[widget.currentRequest].requestid);
                           await _user.updateUserData();

@@ -9,6 +9,7 @@ import 'package:agaol/loadingWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../Providers/homeWidgetProvider.dart';
 import 'bottomBarWidget.dart';
 
 class MyRequestsWidget extends StatefulWidget {
@@ -52,7 +53,10 @@ class _MyRequestsWidgetState extends State<MyRequestsWidget> {
                     userDatabase userDatabaseRef = userDatabase(uid: AuthService().currentUser!.uid);
                     await userDatabaseRef.updateRequestListDelete(requestData?.requestid);
                     await _user?.updateUserData();
+                    await requestDatabase().deleteRequest(requestData?.requestid);
                     await Provider.of<userRequestProvider>(context, listen: false).setUserRequests(_user?.userobj?.requests);
+                    await Provider.of<HomeWidgetProvider?>(context,listen: false)?.refreshRequests();
+
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(

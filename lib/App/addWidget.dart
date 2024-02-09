@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
 import '../Models/requestModel.dart';
+import '../Providers/homeWidgetProvider.dart';
 
 class AddWidget extends StatefulWidget {
   AddWidget({super.key});
@@ -209,7 +210,8 @@ class _AddWidgetState extends State<AddWidget> {
                         String? newRequestID = newRequestDocument.id;
                         await userDatabaseRef.updateRequestListAdd(newRequestID);
                         await _user.updateUserData();
-                        Provider.of<userRequestProvider>(context, listen: false).setUserRequests(_user.userobj?.requests);
+                        await Provider.of<userRequestProvider>(context, listen: false).setUserRequests(_user.userobj?.requests);
+                        await Provider.of<HomeWidgetProvider?>(context,listen: false)?.refreshRequests();
 
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

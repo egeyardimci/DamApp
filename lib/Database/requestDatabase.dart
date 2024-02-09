@@ -58,7 +58,10 @@ class requestDatabase {
     await requestCollection.doc(requestID).update({
       'acceptedby': acceptedByList,
     });
+  }
 
+  Future deleteRequest(requestID) async {
+    await requestCollection.doc(requestID).delete();
   }
 
 
