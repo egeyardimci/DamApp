@@ -39,6 +39,7 @@ class _MyRequestsWidgetState extends State<MyRequestsWidget> {
             for(myRequest? requestData in _userRequests.userRequests ?? []){
               requestWidgetList.add(RequestCardWidget(
                   name: requestData?.name ?? "",
+                  age: requestData?.age ?? "",
                   date: requestData?.date ?? "",
                   time: requestData?.time ?? "",
                   location: requestData?.location ?? "",

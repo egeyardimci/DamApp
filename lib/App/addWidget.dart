@@ -35,13 +35,29 @@ class _AddWidgetState extends State<AddWidget> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
+      helpText: 'Day the date will take place',
       initialDate: DateTime.now(),
       firstDate: DateTime(2022),
       lastDate: DateTime(2100),
     );
     if (picked != null && picked != DateTime.now()) {
       setState(() {
-        date = picked.toString();
+        date = picked.toString().split(" ")[0];
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      helpText: 'Day the date will take place',
+      initialTime: TimeOfDay.now(),
+      initialEntryMode: TimePickerEntryMode.dial,
+    );
+    if (picked != null) {
+      setState(() {
+        time = "${picked.hour}:${picked.minute}";
+        print(time);
       });
     }
   }
@@ -123,26 +139,27 @@ class _AddWidgetState extends State<AddWidget> {
                       ),
                     ),
                   ),
-                  Card(
+                  Card (
                     child: Center(
                       child: Padding(
                         padding: EdgeInsets.symmetric(),
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Column(
-                            children: [
-                              TextFormField(
-                                validator: (value) => value!.isEmpty ? 'Enter a exact date' : null,
-                                keyboardType: TextInputType.datetime,
-                                decoration: InputDecoration(
-                                  icon: Icon(Icons.date_range),
-                                  labelText: 'Enter Exact Day of Current Month ',
-                                ),
-                                onChanged: (value) {
-                                  setState(() => date = value);
-                                },
-                              ),
-                            ],
+                          child: TextFormField(
+                            validator: (value) => value!.isEmpty ? 'Pick a date' : null,
+                            decoration: InputDecoration(
+                              icon: Icon(Icons.date_range),
+                              labelText: 'Date',
+                            ),
+                            readOnly: true,
+                            onTap: (){
+                              _selectDate(context);
+                            },
+                            onChanged: (value) {
+                              print(date);
+                              setState(() => date = value);
+                            },
+                            controller: TextEditingController(text: date),
                           ),
                         ),
                       ),
@@ -157,15 +174,20 @@ class _AddWidgetState extends State<AddWidget> {
                           child: Column(
                             children: [
                               TextFormField(
-                                validator: (value) => value!.isEmpty ? 'Enter an hour' : null,
-                                keyboardType: TextInputType.datetime,
+                                validator: (value) => value!.isEmpty ? 'Pick a time' : null,
                                 decoration: InputDecoration(
                                   icon: Icon(Icons.timelapse_rounded),
-                                  labelText: 'Enter Hour of the Date ',
+                                  labelText: 'Time',
                                 ),
+                                readOnly: true,
+                                onTap: (){
+                                  _selectTime(context);
+                                },
                                 onChanged: (value) {
+                                  print(time);
                                   setState(() => time = value);
                                 },
+                                controller: TextEditingController(text: time),
                               ),
                             ],
                           ),
@@ -173,19 +195,6 @@ class _AddWidgetState extends State<AddWidget> {
                       ),
                     ),
                   ),
-                  Card(
-                    child: Column(
-                      children: [
-                        Text("${date}".split(' ')[0]),
-                        const SizedBox(height: 20.0,),
-                        ElevatedButton(
-                          onPressed: () => _selectDate(context),
-                          child: const Text('Select date'),
-                        ),
-                      ],
-                    ),
-                  ),
-
                   ElevatedButton.icon(
                     onPressed: () async {
                       if(_formKey.currentState!.validate() ){

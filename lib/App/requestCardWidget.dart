@@ -9,15 +9,16 @@ import 'package:flutter/widgets.dart';
 class RequestCardWidget extends StatelessWidget {
 
   String name;
+  String age;
   String date;
   String time;
   String location;
   String whoPays;
   String lookingFor;
 
-  RequestCardWidget({super.key,required this.name,required this.date, required this.time,
-  required this.location, required this.lookingFor, required this.whoPays}
-  );
+  RequestCardWidget({super.key,required this.name,required this.age, required this.date, required this.time,
+    required this.location, required this.lookingFor, required this.whoPays}
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +39,8 @@ class RequestCardWidget extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
                         child: Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade600, width: 2.0), // Set border color and width
-                            borderRadius: BorderRadius.zero
+                              border: Border.all(color: Colors.grey.shade600, width: 2.0), // Set border color and width
+                              borderRadius: BorderRadius.zero
                           ),
                           child: Image(
                             image: AssetImage("assets/paul_mescal.jpg"),
@@ -49,53 +50,143 @@ class RequestCardWidget extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                      child: Column(
                         children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Name: $name",
-                                style: TextStyle(
-                                  fontSize: 20
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "$name, ",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                              Text("Date: $date",
-                                style: TextStyle(
-                                    fontSize: 20
+                                TextSpan(
+                                  text: "$age",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                              Text("Time: $time",
-                                style: TextStyle(
-                                    fontSize: 20
-                                ),
-                              )
-                            ],
+                              ],
+                            ),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Location: $location",
-                                style: TextStyle(
-                                    fontSize: 20
+                          SizedBox(height: 5.0),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "Date : ",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                              Text("Who pays: $whoPays",
-                                style: TextStyle(
-                                    fontSize: 20
+                                TextSpan(
+                                  text: "$date",
+                                  style: TextStyle(
+                                    fontSize: 17.0,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                              Text("Looking for: $lookingFor",
-                                style: TextStyle(
-                                    fontSize: 20
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "Time : ",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              )
-                            ],
+                                TextSpan(
+                                  text: "$time",
+                                  style: TextStyle(
+                                    fontSize: 17.0,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "Location : ",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "$location",
+                                  style: TextStyle(
+                                    fontSize: 17.0,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "Looking For : ",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "$lookingFor",
+                                  style: TextStyle(
+                                    fontSize: 17.0,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "Bill Share : ",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "$whoPays",
+                                  style: TextStyle(
+                                    fontSize: 17.0,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
