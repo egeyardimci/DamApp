@@ -31,7 +31,7 @@ class _WrapperWidgetState extends State<WrapperWidget> {
     else{
       return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => myUserProvider()),
+          ChangeNotifierProvider<myUserProvider>(create: (context) => myUserProvider()),
           FutureProvider<myUser?>(
             create: (context) => context.read<myUserProvider>().setUser(),
             initialData: null,

@@ -198,7 +198,7 @@ class _AddWidgetState extends State<AddWidget> {
                             _user.currentUser?.preference, location ,date);
 
                         String? newRequestID = newRequestDocument.id;
-                        await userDatabaseRef.updateRequestList(newRequestID);
+                        await userDatabaseRef.updateRequestListAdd(newRequestID);
                         await _user.updateUserData();
                         Provider.of<userRequestProvider>(context, listen: false).setUserRequests(_user.userobj?.requests);
 

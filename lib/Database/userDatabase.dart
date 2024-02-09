@@ -28,10 +28,24 @@ class userDatabase {
     });
   }
 
-  Future updateRequestList(String? newRequestID) async {
+  Future updateRequestListAdd(String? newRequestID) async {
 
     List requestList = await getSingleUserData("requests");
     requestList.add(newRequestID);
+
+    await userCollection.doc(uid).update({
+      'requests': requestList,
+    });
+  }
+
+  Future updateRequestListDelete(String? requestID) async {
+
+    List requestList = await getSingleUserData("requests");
+    try {
+      requestList.remove(requestID);
+    }catch(e){
+      print("Error on deletion of request");
+    }
 
     await userCollection.doc(uid).update({
       'requests': requestList,
