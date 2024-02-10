@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import '../Database/requestDatabase.dart';
 import '../Models/requestModel.dart';
 
+//PROVIDER FOR THE USER'S OWN REQUESTS
 class userRequestProvider with ChangeNotifier {
 
   List<myRequest>? userRequests = [];

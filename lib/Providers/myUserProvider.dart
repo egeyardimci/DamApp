@@ -4,6 +4,7 @@ import '../Auth/authService.dart';
 import '../Database/userDatabase.dart';
 import '../Models/userModel.dart';
 
+//PROVIDER FOR THE CURRENT USER
 class myUserProvider with ChangeNotifier {
 
   myUser? userobj;
