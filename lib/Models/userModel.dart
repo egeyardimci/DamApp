@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:agaol/Auth/authService.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,43 +16,48 @@ class myUser{
   List? requests = [];
   List? likedrequests = [];
   List? dislikedrequests= [];
+  String? uid = "";
 
-  myUser({this.name,this.age,
-    this.gender, this.preference, this.about,this.requests,this.likedrequests,this.dislikedrequests});
+  myUser(
+      {
+        this.name,
+        this.age,
+        this.gender,
+        this.preference,
+        this.about,
+        this.requests,
+        this.likedrequests,
+        this.dislikedrequests,
+      })
+  {
+    this.uid = AuthService().currentUser?.uid;
+  }
+
+  myUser.fromMap (Map<String, dynamic>? userdata){
+
+      name = userdata?["name"];
+      age = userdata?["age"];
+      gender = userdata?["gender"];
+      preference = userdata?["preference"];
+      about = userdata?["about"];
+      requests = userdata?["requests"];
+      likedrequests = userdata?["likedrequests"];
+      dislikedrequests =  userdata?["dislikedrequests"];
+      uid = AuthService().currentUser?.uid;
+
+  }
+
+  Map<String, dynamic>? toMap(myUser user){
+    return {
+      'name' : user.name,
+      'age' : user.age,
+      'gender' : user.gender,
+      'preference' : user.preference,
+      'about' : user.about,
+      'requests' : user.requests,
+      'likedrequests' : user.likedrequests,
+      'dislikedrequests' : user.dislikedrequests
+    };
+  }
 
 }
-
-class myUserProvider with ChangeNotifier {
-
-  myUser? userobj;
-
-
-  AuthService authService = AuthService();
-
-  myUser? convertUser(Map<String, dynamic>? userdata){
-    myUser? _user = myUser(name: userdata?["name"], age: userdata?["age"], gender: userdata?["gender"],
-        preference: userdata?["preference"], about: userdata?["about"],requests: userdata?["requests"],
-        likedrequests: userdata?["likedrequests"], dislikedrequests: userdata?["dislikedrequests"]);
-    return(_user);
-  }
-
-  Future<myUser?> setUser () async{
-    DocumentSnapshot<Object?>? snapshot = await userDatabase(uid: authService.currentUser!.uid).currentUser;
-    Map<String, dynamic>? map = snapshot?.data() as Map<String, dynamic>?;
-
-    userobj = convertUser(map);
-    notifyListeners();
-    return userobj;
-  }
-
-  Future<void> updateUserData() async{
-    await setUser();
-    notifyListeners();
-  }
-
-  myUser? get currentUser{
-    return this.userobj;
-  }
-
-}
-

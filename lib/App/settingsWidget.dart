@@ -9,6 +9,8 @@ import "package:provider/provider.dart";
 import 'package:agaol/Database/userDatabase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../Providers/myUserProvider.dart';
+
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({super.key});
 

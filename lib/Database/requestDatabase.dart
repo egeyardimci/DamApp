@@ -30,10 +30,32 @@ class requestDatabase {
     });
   }
 
-  Future<List<QueryDocumentSnapshot?>> getRequests(int count) async {
+  Future<List<QueryDocumentSnapshot?>> getRequestSnapshots(int count) async {
     //Update the user collection in database
     QuerySnapshot? snapshot = await requestCollection.limit(count).get();
     return snapshot.docs;
+  }
+
+  Future<List<myRequest>?> getRequests() async{
+    List<myRequest> requestList = [];
+    List<QueryDocumentSnapshot?> requestdatalist = await getRequestSnapshots(100);
+
+    for(QueryDocumentSnapshot? requestdata in requestdatalist){
+      requestList.add(myRequest.fromMap(requestdata?.data() as Map<String, dynamic>?,requestdata?.id));
+    }
+
+    return requestList;
+
+  }
+
+  Future<myRequest> getRequestByID(String? id) async{
+    DocumentSnapshot snapshot = await requestDatabase().requestCollection
+        .doc(id).get();
+    String? requestID = snapshot.id;
+    Map<String, dynamic>? requestMap = snapshot.data() as Map<String, dynamic>?;
+
+    myRequest current = myRequest.fromMap(requestMap,requestID);
+    return current;
   }
 
   Future getSingleRequestData(requestID,attributeName) async {
@@ -63,6 +85,7 @@ class requestDatabase {
   Future deleteRequest(requestID) async {
     await requestCollection.doc(requestID).delete();
   }
+
 
 
 }

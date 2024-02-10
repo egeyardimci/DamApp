@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import "package:provider/provider.dart";
 
 import 'Models/requestModel.dart';
+import 'Providers/myUserProvider.dart';
 
 class WrapperWidget extends StatefulWidget {
   WrapperWidget({super.key});
@@ -21,20 +22,17 @@ class WrapperWidget extends StatefulWidget {
 class _WrapperWidgetState extends State<WrapperWidget> {
   @override
   Widget build(BuildContext context) {
-
-
     final User? user = Provider.of<User?>(context);
-
 
     if(user == null){
       return AuthWrapper();
     }
+
     else{
       return MultiProvider(
         providers: [
-          ChangeNotifierProvider<myUserProvider>(create: (context) => myUserProvider()),
-          FutureProvider<myUser?>(
-            create: (context) => context.read<myUserProvider>().setUser(),
+          FutureProvider<myUserProvider?>(
+            create: (_) => myUserProvider().setUser(),
             initialData: null,
           ),
           FutureProvider<HomeWidgetProvider?>(

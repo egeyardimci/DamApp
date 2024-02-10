@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../Providers/homeWidgetProvider.dart';
+import '../Providers/myUserProvider.dart';
+import '../Providers/userRequestProvider.dart';
 import 'bottomBarWidget.dart';
 
 class MyRequestsWidget extends StatefulWidget {

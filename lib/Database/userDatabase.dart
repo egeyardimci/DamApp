@@ -62,11 +62,16 @@ class userDatabase {
     return map?[attributeName];
   }
 
-
   Future updateSingleUserData(String attributeName, String attributeValue) async {
     return await userCollection.doc(uid).update({
       attributeName: attributeValue,
     });
+  }
+
+  Future<Map<String,dynamic>?> getUserDataAsMap() async{
+    DocumentSnapshot<Object?>? snapshot = await currentUser;
+    Map<String, dynamic>? map = snapshot?.data() as Map<String, dynamic>?;
+    return map;
   }
 
   Future<DocumentSnapshot>? get currentUser async {

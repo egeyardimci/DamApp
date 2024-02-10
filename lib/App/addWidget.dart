@@ -14,6 +14,8 @@ import 'package:flutter/widgets.dart';
 
 import '../Models/requestModel.dart';
 import '../Providers/homeWidgetProvider.dart';
+import '../Providers/myUserProvider.dart';
+import '../Providers/userRequestProvider.dart';
 
 class AddWidget extends StatefulWidget {
   AddWidget({super.key});
@@ -26,7 +28,6 @@ class AddWidget extends StatefulWidget {
 class _AddWidgetState extends State<AddWidget> {
 
   final _formKey = GlobalKey<FormState>();
-
 
   String whopays = "";
   String date = "";

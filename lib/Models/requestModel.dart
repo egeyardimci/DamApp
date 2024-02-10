@@ -15,68 +15,51 @@ class myRequest{
   String? whopays = "";
   String? requestid = "";
 
-  myRequest({this.name,this.age,this.date,this.location,this.preference,this.time,this.uid,
-  this.whopays,this.acceptedby,this.declinedby,this.requestid});
+  myRequest(
+      {
+        this.name,
+        this.age,
+        this.date,
+        this.location,
+        this.preference,
+        this.time,
+        this.uid,
+        this.whopays,
+        this.acceptedby,
+        this.declinedby,
+        this.requestid
+      }
+  );
 
-}
-
-class myRequestProvider with ChangeNotifier{
-
-  Future<List<myRequest>?> getRequests() async{
-    print("EGE");
-    List<myRequest> requestList = [];
-
-    List list = await requestDatabase().getRequests(100);
-
-
-    for(var i in list){
-      requestList.add(myRequest(name: i?["name"],age: i?["age"],date: i?["date"],
-      declinedby: i?["declinedby"],acceptedby: i?["acceptedby"],location: i?["location"],
-      time: i?["time"],uid: i?["uid"],preference: i?["preference"],whopays: i?["whopays"],requestid: i?.id));
-    }
-
-    notifyListeners();
-    return requestList;
+  myRequest.fromMap(Map<String,dynamic>? requestdata,reqid){
+    this.name = requestdata?["name"];
+    this.age = requestdata?["age"];
+    this.date  = requestdata?["date"];
+    this.location  = requestdata?["location"];
+    this.preference  = requestdata?["preference"];
+    this.time  = requestdata?["time"];
+    this.uid  = requestdata?["uid"];
+    this.whopays  = requestdata?["whopays"];
+    this.acceptedby  = requestdata?["acceptedby"];
+    this.declinedby  = requestdata?["declinedby"];
+    this.requestid  = reqid;
 
   }
 
+  Map<String,dynamic>? toMap(Map<String,dynamic>? requestdata,reqid){
+    return {
+      'name' : name,
+      'age' : age,
+      'date' : date,
+      'location' : location,
+      'preference' : preference,
+      'time' : time,
+      'uid' : uid,
+      'whopays' : whopays,
+      'acceptedby' : acceptedby,
+      'declinedby' : declinedby,
+    };
 
-
-}
-
-class userRequestProvider with ChangeNotifier{
-
-  List<myRequest>? userRequests = [];
-
-
-  Future<userRequestProvider> setUserRequests (List? requestList) async{
-    this.userRequests = await getUserRequests(requestList);
-    notifyListeners();
-    return this;
   }
-
-  Future<List<myRequest>?> getUserRequests(List? requestList) async {
-    //Update the user collection in database,
-    if(requestList == null){
-      return null;
-    }
-    List<myRequest> myRequestsList = [];
-
-    for(String? id in requestList) {
-      DocumentSnapshot snapshot = await requestDatabase().requestCollection
-          .doc(id).get();
-
-      String? requestID = snapshot.id;
-
-      Map<String, dynamic>? i = snapshot.data() as Map<String, dynamic>?;
-      myRequest current = myRequest(name: i?["name"],age: i?["age"],date: i?["date"],
-          declinedby: i?["declinedby"],acceptedby: i?["acceptedby"],location: i?["location"],
-          time: i?["time"],uid: i?["uid"],preference: i?["preference"],whopays: i?["whopays"],requestid: requestID);
-
-      myRequestsList.add(current);
-    }
-    return myRequestsList;
-  }
-
 
 }

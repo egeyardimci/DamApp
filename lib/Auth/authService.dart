@@ -4,11 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:agaol/Database/requestDatabase.dart';
 
-
-
 class AuthService{
-  FirebaseAuth _auth = FirebaseAuth.instance;
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<User?> signInAnon() async{
     try {
@@ -58,7 +55,6 @@ class AuthService{
   User? get currentUser{
     return _auth.currentUser;
   }
-
 
   Future<void>? signOut(){
     try {

@@ -20,6 +20,8 @@ import 'package:provider/provider.dart';
 
 import '../Database/userDatabase.dart';
 import '../Models/requestModel.dart';
+import '../Providers/myUserProvider.dart';
+import '../Providers/userRequestProvider.dart';
 import '../firebase_options.dart';
 class AppWidget extends StatefulWidget {
   AppWidget({super.key});
@@ -39,11 +41,11 @@ class _AppWidgetState extends State<AppWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final myUser? user = Provider.of<myUser?>(context);
+    final myUserProvider? user = Provider.of<myUserProvider?>(context);
     return MultiProvider(
       providers: [
         FutureProvider<userRequestProvider?>(
-          create: (_) => userRequestProvider().setUserRequests(user?.requests),
+          create: (_) => userRequestProvider().setUserRequests(user?.currentUser?.requests),
           initialData: null,
         ),
       ],

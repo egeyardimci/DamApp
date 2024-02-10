@@ -11,6 +11,8 @@ import 'package:agaol/App/bottomBarWidget.dart';
 import 'package:agaol/App/topBarWidget.dart';
 import 'package:provider/provider.dart';
 
+import '../Providers/myUserProvider.dart';
+
 class ProfileWidget extends StatefulWidget {
 
   ProfileWidget({super.key});

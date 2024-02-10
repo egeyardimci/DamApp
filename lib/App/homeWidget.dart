@@ -16,6 +16,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../Models/userModel.dart';
+import '../Providers/myUserProvider.dart';
 
 class HomeWidget extends StatefulWidget {
 
@@ -33,12 +34,14 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     final dynamic _HomeWidgetProvider = Provider.of<HomeWidgetProvider?>(context);
     final List<myRequest>? requestData = _HomeWidgetProvider?.requestList;
+
     if(requestData == null){
       return LoadingWidget();
     }
+
     else {
 
-      final myUserProvider _user = Provider.of<myUserProvider>(context,listen: false);
+      final myUserProvider? _user = Provider.of<myUserProvider?>(context,listen: false);
       final userDatabase userDataBaseRef = userDatabase(uid: AuthService().currentUser!.uid);
       final requestDatabase requestDataBaseRef = requestDatabase();
 
@@ -46,8 +49,8 @@ class _HomeWidgetState extends State<HomeWidget> {
       dynamic dislikecolor = Colors.grey.shade800;
 
 
-      List likedrequests = _user.currentUser?.likedrequests ?? [];
-      List dislikedrequests = _user.currentUser?.dislikedrequests ?? [];
+      List likedrequests = _user?.currentUser?.likedrequests ?? [];
+      List dislikedrequests = _user?.currentUser?.dislikedrequests ?? [];
 
       if(likedrequests.contains(requestData[widget.currentRequest].requestid)){
         likecolor = Colors.green;
@@ -90,7 +93,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
                           await userDataBaseRef.updateLikedRequestList(requestData[widget.currentRequest].requestid);
                           await requestDataBaseRef.updateAcceptedList(requestData[widget.currentRequest].requestid);
-                          await _user.updateUserData();
+                          await _user?.updateUserData();
                           setState(() {
                             reload = !reload;
                           });
@@ -100,7 +103,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         ),
                         IconButton(onPressed: () async{
                           await userDataBaseRef.updateDislikedRequestList(requestData[widget.currentRequest].requestid);
-                          await _user.updateUserData();
+                          await _user?.updateUserData();
                           setState(() {
                             reload = !reload;
                           });
