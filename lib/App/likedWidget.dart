@@ -94,12 +94,7 @@ class _LikeProfileWidgetState extends State<LikeProfileWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(onPressed: () {
-                  List requestsIDList = widget.provider?.acceptedUserIDtoRequestID[widget.uid] ?? [];
-                  List<myRequest?> requestsAcceptedByThisUser = [];
-                    for (String? requestIDs in requestsIDList) {
-                      requestsAcceptedByThisUser.add(widget.provider!.requestIDtoMyRequestMap[requestIDs]);
-                    }
-                    Navigator.pushNamed(context, '/liked/requests',arguments: requestsAcceptedByThisUser);
+                    Navigator.pushNamed(context, '/liked/requests',arguments: widget.uid);
                 },
                   icon: Icon(Icons.document_scanner),
                 ),
