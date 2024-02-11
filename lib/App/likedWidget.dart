@@ -94,6 +94,7 @@ class _LikeProfileWidgetState extends State<LikeProfileWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(onPressed: () {
+                  print(widget.name);
                     Navigator.pushNamed(context, '/liked/requests',arguments: widget.uid);
                 },
                   icon: Icon(Icons.document_scanner),

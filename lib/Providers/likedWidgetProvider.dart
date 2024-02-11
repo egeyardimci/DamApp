@@ -56,6 +56,7 @@ class LikedWidgetProvider with ChangeNotifier {
 
     for(var acceptedUser in acceptedUserIDtoRequestID.keys){
       myUser? acceptedUserObj = await userDatabaseRef.getUserDataByID(acceptedUser);
+      acceptedUserObj?.uid = acceptedUser;
       acceptedUsertoMyUser[acceptedUser] = acceptedUserObj;
     }
     notifyListeners();
