@@ -25,7 +25,6 @@ class LikedWidgetProvider with ChangeNotifier {
 
   Future<void> flushData() async{
     requestIDList = [];
-
     requestIDtoMyRequestMap = {};
     acceptedUserIDtoRequestID = {};
     acceptedUsertoMyUser = {};
