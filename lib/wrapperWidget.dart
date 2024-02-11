@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import "package:provider/provider.dart";
 
 import 'Models/requestModel.dart';
+import 'Providers/likedWidgetProvider.dart';
 import 'Providers/myUserProvider.dart';
 
 class WrapperWidget extends StatefulWidget {
@@ -37,6 +38,10 @@ class _WrapperWidgetState extends State<WrapperWidget> {
           ),
           FutureProvider<HomeWidgetProvider?>(
             create: (_) => HomeWidgetProvider().refreshRequests(),
+            initialData: null,
+          ),
+          FutureProvider<LikedWidgetProvider?>(
+            create: (_) => LikedWidgetProvider().fetchData(),
             initialData: null,
           ),
         ],

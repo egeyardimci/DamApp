@@ -1,4 +1,6 @@
+import 'package:agaol/Providers/likedWidgetProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TopBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -20,7 +22,8 @@ class TopBarWidget extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           color: Colors.white,
           icon: Icon(Icons.favorite),
-          onPressed: () {
+          onPressed: () async{
+            await Provider.of<LikedWidgetProvider?>(context,listen: false)?.fetchData();
             Navigator.pushReplacementNamed(context,"/liked");
           },
         ),

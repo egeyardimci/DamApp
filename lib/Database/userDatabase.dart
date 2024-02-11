@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/rendering.dart';
 
+import '../Models/userModel.dart';
+
 class userDatabase {
 
   //User is referred by uid
@@ -77,6 +79,18 @@ class userDatabase {
   Future<DocumentSnapshot>? get currentUser async {
     DocumentSnapshot snapshot = await userCollection.doc(uid).get();
     return snapshot;
+  }
+
+  Future<myUser>? getUserDataByID(String? _uid) async{
+    DocumentSnapshot snapshot = await userCollection.doc(_uid).get();
+    Map<String, dynamic>? map = snapshot.data() as Map<String, dynamic>?;
+    return myUser.fromMap(map);
+  }
+
+  Future<myUser>? getCurrentUser() async{
+    DocumentSnapshot snapshot = await userCollection.doc(uid).get();
+    Map<String, dynamic>? map = snapshot.data() as Map<String, dynamic>?;
+    return myUser.fromMap(map);
   }
 
   Future updateLikedRequestList(String? requestID) async {

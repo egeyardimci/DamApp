@@ -4,81 +4,87 @@ import 'package:flutter/widgets.dart';
 
 class ProfileCardWidget extends StatelessWidget {
 
-  String name;
-  String gender;
-  String preference;
-  int age;
+  String? name;
+  String? gender;
+  String? preference;
+  String? age;
+  String? about;
 
-  ProfileCardWidget({super.key, required this.name,required this.gender, required this.age, required this.preference});
+  ProfileCardWidget({super.key, required this.name,required this.gender, required this.age, required this.preference, required this.about});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.50,
-      child: Expanded(
-        child: Container(
-          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-          child: Card(
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade600, width: 2.0), // Set border color and width
-                          borderRadius: BorderRadius.zero
-                      ),
-                      child: Image(
-                        image: AssetImage("assets/paul_mescal.jpg"),
-                      ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Card(
+        elevation: 4.0,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(4.0),
+                topRight: Radius.circular(4.0),
+              ),
+              child: Image(
+                image: AssetImage("assets/paul_mescal.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${name}",
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-
-                Expanded(
-                  flex: 1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Name: $name",
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
-                          ),
-                          Text("Gender: $gender",
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Age: $age",
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
-                          ),
-                          Text("Preference: $preference",
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  SizedBox(height: 8.0),
+                  Text(
+                    "${gender}, ${age}",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.grey[800],
+                    ),
                   ),
-                )
-              ],
+                  Text(
+                    "Preferred: ${preference}",
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                  SizedBox(height: 12.0),
+                  Text(
+                    "About Me:",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 5.0),
+                  if(about != null)
+                    Text(
+                      "${about}",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  if(about == null)
+                    Text(
+                      "...",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

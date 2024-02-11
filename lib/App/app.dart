@@ -3,6 +3,7 @@ import 'package:agaol/Auth/authWrapper.dart';
 import 'package:agaol/App/addWidget.dart';
 import 'package:agaol/App/likedWidget.dart';
 import 'package:agaol/Models/userModel.dart';
+import 'package:agaol/Providers/likedWidgetProvider.dart';
 import 'package:agaol/loadingWidget.dart';
 import 'package:agaol/App/messagesWidget.dart';
 import 'package:agaol/App/searchWidget.dart';

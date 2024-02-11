@@ -65,6 +65,13 @@ class requestDatabase {
     return map?[attributeName];
   }
 
+  Future getRequestDataByID(requestID) async {
+    DocumentSnapshot snapshot = await requestCollection.doc(requestID).get();
+    Map<String, dynamic>? map = snapshot.data() as Map<String, dynamic>?;
+
+    return myRequest.fromMap(map, requestID);
+  }
+
   Future updateAcceptedList(String? requestID) async {
 
     final String? uid = AuthService().currentUser?.uid;
