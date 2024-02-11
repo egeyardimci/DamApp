@@ -23,7 +23,6 @@ class TopBarWidget extends StatelessWidget implements PreferredSizeWidget {
           color: Colors.white,
           icon: Icon(Icons.favorite),
           onPressed: () async{
-            await Provider.of<LikedWidgetProvider?>(context,listen: false)?.fetchData();
             Navigator.pushReplacementNamed(context,"/liked");
           },
         ),

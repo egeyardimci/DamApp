@@ -32,7 +32,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final dynamic _HomeWidgetProvider = Provider.of<HomeWidgetProvider?>(context);
+    final HomeWidgetProvider? _HomeWidgetProvider = Provider.of<HomeWidgetProvider?>(context);
     final List<myRequest>? requestData = _HomeWidgetProvider?.requestList;
 
     if(requestData == null){
@@ -40,6 +40,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     }
 
     else {
+
 
       final myUserProvider? _user = Provider.of<myUserProvider?>(context,listen: false);
       final userDatabase userDataBaseRef = userDatabase(uid: AuthService().currentUser!.uid);
@@ -62,72 +63,77 @@ class _HomeWidgetState extends State<HomeWidget> {
       return Scaffold(
           appBar: TopBarWidget(title: 'DamApp',),
           bottomNavigationBar: BottomBarWidget(currentindex: 0,),
-          body: Column(
-            children: [
-              RequestCardWidget(
-                  name: requestData[widget.currentRequest].name ?? "",
-                  age: requestData[widget.currentRequest].age ?? "",
-                  date: requestData[widget.currentRequest].date ?? "",
-                  time: requestData[widget.currentRequest].time ?? "",
-                  location: requestData[widget.currentRequest].location ?? "",
-                  lookingFor: requestData[widget.currentRequest].preference ??
-                      "",
-                  whoPays: requestData[widget.currentRequest].whopays ?? ""),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(20, 40, 20, 40),
-                  child: Card(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(onPressed: () {
-                          setState(() {
-                            if (widget.currentRequest > 0) {
-                              widget.currentRequest--;
-                            }
-                          });
-                        },
-                          icon: Icon(Icons.chevron_left),
-                        ),
-                        IconButton(onPressed: () async{
+          body: RefreshIndicator(
+            onRefresh: ()async{
+              await _HomeWidgetProvider?.refreshRequests();
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  RequestCardWidget(
+                      name: requestData[widget.currentRequest].name ?? "",
+                      age: requestData[widget.currentRequest].age ?? "",
+                      date: requestData[widget.currentRequest].date ?? "",
+                      time: requestData[widget.currentRequest].time ?? "",
+                      location: requestData[widget.currentRequest].location ?? "",
+                      lookingFor: requestData[widget.currentRequest].preference ??
+                          "",
+                      whoPays: requestData[widget.currentRequest].whopays ?? ""),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20, 40, 20,40),
+                    child: Card(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(onPressed: () {
+                            setState(() {
+                              if (widget.currentRequest > 0) {
+                                widget.currentRequest--;
+                              }
+                            });
+                          },
+                            icon: Icon(Icons.chevron_left),
+                          ),
+                          IconButton(onPressed: () async{
 
-                          await userDataBaseRef.updateLikedRequestList(requestData[widget.currentRequest].requestid);
-                          await requestDataBaseRef.updateAcceptedList(requestData[widget.currentRequest].requestid);
-                          await _user?.updateUserData();
-                          setState(() {
-                            reload = !reload;
-                          });
-                        },
-                          icon: Icon(Icons.thumb_up,
-                              color: likecolor),
-                        ),
-                        IconButton(onPressed: () async{
-                          await userDataBaseRef.updateDislikedRequestList(requestData[widget.currentRequest].requestid);
-                          await requestDataBaseRef.updateAcceptedList(requestData[widget.currentRequest].requestid);
-                          await _user?.updateUserData();
-                          setState(() {
-                            reload = !reload;
-                          });
+                            await userDataBaseRef.updateLikedRequestList(requestData[widget.currentRequest].requestid);
+                            await requestDataBaseRef.updateAcceptedList(requestData[widget.currentRequest].requestid);
+                            await _user?.updateUserData();
+                            setState(() {
+                              reload = !reload;
+                            });
+                          },
+                            icon: Icon(Icons.thumb_up,
+                                color: likecolor),
+                          ),
+                          IconButton(onPressed: () async{
+                            await userDataBaseRef.updateDislikedRequestList(requestData[widget.currentRequest].requestid);
+                            await requestDataBaseRef.updateAcceptedList(requestData[widget.currentRequest].requestid);
+                            await _user?.updateUserData();
+                            setState(() {
+                              reload = !reload;
+                            });
 
-                        },
-                          icon: Icon(Icons.thumb_down,
-                          color: dislikecolor,),
-                        ),
-                        IconButton(onPressed: () {
-                          setState(() {
-                            if (widget.currentRequest < requestData!.length - 1) {
-                              widget.currentRequest++;
-                            }
-                          });
-                        },
-                          icon: Icon(Icons.chevron_right),
-                        )
-                      ],
+                          },
+                            icon: Icon(Icons.thumb_down,
+                            color: dislikecolor,),
+                          ),
+                          IconButton(onPressed: () {
+                            setState(() {
+                              if (widget.currentRequest < requestData!.length - 1) {
+                                widget.currentRequest++;
+                              }
+                            });
+                          },
+                            icon: Icon(Icons.chevron_right),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-              )
-            ],
+                  )
+                ],
+              ),
+            ),
           ),
         );
     }

@@ -11,8 +11,15 @@ import 'package:agaol/App/topBarWidget.dart';
 import 'package:provider/provider.dart';
 
 
-class LikedWidget extends StatelessWidget {
+class LikedWidget extends StatefulWidget {
   LikedWidget({super.key});
+
+  @override
+  State<LikedWidget> createState() => _LikedWidgetState();
+}
+
+class _LikedWidgetState extends State<LikedWidget> {
+  bool reload = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +51,18 @@ class LikedWidget extends StatelessWidget {
     return Scaffold(
       appBar: TopBarWidget(title: 'DamApp',),
       bottomNavigationBar: BottomBarWidget(currentindex: 0,),
-      body: SingleChildScrollView(
-      child: Column(
-      children: widgetList,
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          await provider.fetchData();
+          setState(() {
+            reload != reload;
+          });
+
+        },
+        child: SingleChildScrollView(
+        child: Column(
+        children: widgetList,
+          ),
         ),
       ),
     );
@@ -88,7 +104,7 @@ class _LikeProfileWidgetState extends State<LikeProfileWidget> {
       children: [
         ProfileCardWidget(name:widget.name, gender: widget.gender, age: widget.age, preference: widget.preference,about: widget.about) ,
         Container(
-          margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+          margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
           child: Card(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
