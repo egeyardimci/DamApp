@@ -1,6 +1,7 @@
 import 'package:agaol/App/profileCardWidget.dart';
 import 'package:agaol/App/profileWidget.dart';
 import 'package:agaol/App/requestCardWidget.dart';
+import 'package:agaol/Models/requestModel.dart';
 import 'package:agaol/Models/userModel.dart';
 import 'package:agaol/Providers/likedWidgetProvider.dart';
 import 'package:agaol/loadingWidget.dart';
@@ -94,9 +95,11 @@ class _LikeProfileWidgetState extends State<LikeProfileWidget> {
               children: [
                 IconButton(onPressed: () {
                   List requestsIDList = widget.provider?.acceptedUserIDtoRequestID[widget.uid] ?? [];
+                  List<myRequest?> requestsAcceptedByThisUser = [];
                     for (String? requestIDs in requestsIDList) {
-                      print(widget.provider?.requestIDtoMyRequestMap[requestIDs]?.location);
+                      requestsAcceptedByThisUser.add(widget.provider!.requestIDtoMyRequestMap[requestIDs]);
                     }
+                    Navigator.pushNamed(context, '/liked/requests',arguments: requestsAcceptedByThisUser);
                 },
                   icon: Icon(Icons.document_scanner),
                 ),
