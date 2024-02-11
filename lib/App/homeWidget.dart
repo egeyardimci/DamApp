@@ -103,6 +103,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         ),
                         IconButton(onPressed: () async{
                           await userDataBaseRef.updateDislikedRequestList(requestData[widget.currentRequest].requestid);
+                          await requestDataBaseRef.updateAcceptedList(requestData[widget.currentRequest].requestid);
                           await _user?.updateUserData();
                           setState(() {
                             reload = !reload;
