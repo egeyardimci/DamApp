@@ -23,17 +23,44 @@ class _ChatWidgetState extends State<ChatWidget> {
   Widget _buildMessages(DocumentSnapshot snapshot){
     Map<String?,dynamic> data = snapshot.data() as Map<String?,dynamic>;
     var messageAlign = Alignment.centerLeft;
+    var messageCrossAxisAlignment = CrossAxisAlignment.start;
 
     if(data["authorID"] == AuthService().currentUser?.uid){
       messageAlign = Alignment.centerRight;
+      messageCrossAxisAlignment = CrossAxisAlignment.end;
     }
 
     return Container(
+      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
       alignment: messageAlign,
       child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(data["authorName"] ?? ""),
-            Text(data["text"] ?? ""),
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 6),
+              child: Text(
+                data["authorName"] ?? "",
+                style: TextStyle(
+                  fontSize: 16,
+                    fontWeight: FontWeight.bold
+                ),
+              
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.red
+              ),
+              child: Text(data["text"] ?? "",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
+
+            ),
         ]
       ),
     );
@@ -54,42 +81,60 @@ class _ChatWidgetState extends State<ChatWidget> {
           }
           return Scaffold(
             appBar: TopBarWidget( title: 'DamApp',),
-            body: Column(
-              children: [
-                Expanded(
-                  flex: 90,
-                  child: ListView(
-                    children: stream.data!.docs.map((snapshot) => _buildMessages(snapshot)).toList(),
+            body: Container(
+              padding: EdgeInsets.fromLTRB(0,10,0,10),
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 90,
+                    child: ListView(
+                      children: stream.data!.docs.map((snapshot) => _buildMessages(snapshot)).toList(),
+                      ),
                     ),
-                  ),
-                Expanded(
-                  flex: 10,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          onChanged: (data){
-                            chatMessage = data;
-                          },
-                          controller: messageController,
-                          obscureText: false,
-                          decoration: const InputDecoration(
-                            hintText: 'Type something...',
+                  Expanded(
+                    flex: 10,
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              onChanged: (data){
+                                chatMessage = data;
+                              },
+                              controller: messageController,
+                              obscureText: false,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'Type something...',
+                              ),
+                            ),
                           ),
-                        ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(2, 0, 0, 0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)
+                                )
+                                                  
+                              ),
+                                onPressed: (){
+                                  final myUserProvider? user = Provider.of<myUserProvider?>(context,listen: false);
+                                  chatDatabase().sendMessage(chatRoomID,user!.currentUser?.name ?? "No Name",chatMessage);
+                                },
+                                child: Text("Send")
+                            ),
+                          ),
+                        ],
                       ),
-                      ElevatedButton(
-                          onPressed: (){
-                            final myUserProvider? user = Provider.of<myUserProvider?>(context,listen: false);
-                            chatDatabase().sendMessage(chatRoomID,user!.currentUser?.name ?? "No Name",chatMessage);
-                          },
-                          child: Text("Send")
-                      ),
-                    ],
-                  ),
-                )
-
-              ]
+                    ),
+                  )
+              
+                ]
+              ),
             ),
           );
         }

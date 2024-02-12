@@ -76,6 +76,13 @@ class userDatabase {
     return map;
   }
 
+  Future getSingleUserDataByID(attributeName,_uid) async {
+    DocumentSnapshot<Object?>? snapshot = await userCollection.doc(_uid).get();;
+    Map<String, dynamic>? map = snapshot.data() as Map<String, dynamic>?;
+
+    return map?[attributeName];
+  }
+
   Future<DocumentSnapshot>? get currentUser async {
     DocumentSnapshot snapshot = await userCollection.doc(uid).get();
     return snapshot;
@@ -139,5 +146,37 @@ class userDatabase {
     });
   }
 
+
+  Future updateChatRooms(String? _uid1, String? _uid2,String? roomID) async {
+
+    List chatRoomListU1 = await getSingleUserDataByID("chatrooms",_uid1) ?? [];
+    List chatRoomListU2 = await getSingleUserDataByID("chatrooms",_uid2) ?? [];
+
+    if(chatRoomListU1 == []){
+      await userCollection.doc(uid).update({
+        'chatrooms': [roomID],
+      });
+    }
+    else{
+      chatRoomListU1.add(roomID);
+      await userCollection.doc(uid).update({
+        'chatrooms': chatRoomListU1,
+      });
+    }
+
+    if(chatRoomListU2 == []){
+      await userCollection.doc(_uid2).update({
+        'chatrooms': [roomID],
+      });
+    }
+    else{
+      chatRoomListU2.add(roomID);
+      await userCollection.doc(_uid2).update({
+        'chatrooms': chatRoomListU2,
+      });
+    }
+
+
+  }
 
 }

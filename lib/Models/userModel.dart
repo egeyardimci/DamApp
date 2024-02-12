@@ -17,6 +17,7 @@ class myUser{
   List? likedrequests = [];
   List? dislikedrequests= [];
   String? uid = "";
+  List? chatrooms = [];
 
   myUser(
       {
@@ -28,6 +29,7 @@ class myUser{
         this.requests,
         this.likedrequests,
         this.dislikedrequests,
+        this.chatrooms
       })
   {
     this.uid = AuthService().currentUser?.uid;
@@ -44,6 +46,7 @@ class myUser{
       likedrequests = userdata?["likedrequests"];
       dislikedrequests =  userdata?["dislikedrequests"];
       uid = AuthService().currentUser?.uid;
+      chatrooms = userdata?["chatrooms"];
 
   }
 
@@ -56,7 +59,8 @@ class myUser{
       'about' : user.about,
       'requests' : user.requests,
       'likedrequests' : user.likedrequests,
-      'dislikedrequests' : user.dislikedrequests
+      'dislikedrequests' : user.dislikedrequests,
+      'chatrooms' : user.chatrooms
     };
   }
 

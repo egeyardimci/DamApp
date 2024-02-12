@@ -2,9 +2,11 @@ import 'package:agaol/App/profileCardWidget.dart';
 import 'package:agaol/App/profileWidget.dart';
 import 'package:agaol/App/requestCardWidget.dart';
 import 'package:agaol/Auth/authService.dart';
+import 'package:agaol/Database/userDatabase.dart';
 import 'package:agaol/Models/requestModel.dart';
 import 'package:agaol/Models/userModel.dart';
 import 'package:agaol/Providers/likedWidgetProvider.dart';
+import 'package:agaol/Providers/myUserProvider.dart';
 import 'package:agaol/loadingWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:agaol/App/bottomBarWidget.dart';
@@ -120,7 +122,12 @@ class _LikeProfileWidgetState extends State<LikeProfileWidget> {
 
                   List<String?> IDs = [widget.uid,AuthService().currentUser?.uid];
                   IDs.sort();
-                  String? chatRoomID = IDs[0]! + IDs[1]!;
+                  String? chatRoomID = "${IDs[0]!}_${IDs[1]!}";
+                  List currentUserChatRooms = Provider.of<myUserProvider?>(context,listen: false)?.currentUser?.chatrooms ?? [];
+
+                  if(!(currentUserChatRooms.contains(chatRoomID))){
+                    userDatabase(uid: AuthService().currentUser!.uid).updateChatRooms(AuthService().currentUser?.uid, widget.uid, chatRoomID);
+                  }
 
                   Navigator.pushNamed(context, "/chat",arguments:chatRoomID);
                 },
