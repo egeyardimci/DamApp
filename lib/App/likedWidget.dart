@@ -145,8 +145,15 @@ class _LikeProfileWidgetState extends State<LikeProfileWidget> {
 
                   List currentUserChatRooms = Provider.of<myUserProvider?>(context,listen: false)?.currentUser?.chatrooms ?? [];
 
-                  if(!(currentUserChatRooms.contains(chatRoomID))){
-                    userDatabase(uid: AuthService().currentUser!.uid).updateChatRooms(AuthService().currentUser?.uid, widget.uid, chatRoomID, widget.name);
+                  List decodedChatRooms = [];
+                  for(String roomid in currentUserChatRooms){
+                    decodedChatRooms.add("${roomid.split("_")[0]}_${roomid.split("_")[1]}");
+                    print("${roomid.split("_")[0]}_${roomid.split("_")[1]}");
+                    print(chatRoomID);
+                  }
+
+                  if(!(decodedChatRooms.contains(chatRoomID))){
+                    userDatabase(uid: AuthService().currentUser!.uid).updateChatRooms(AuthService().currentUser?.uid, widget.uid, chatRoomID, widget.name, Provider.of<myUserProvider?>(context,listen: false)?.currentUser?.name );
                   }
 
                   Navigator.pushNamed(context, "/chat",arguments:chatRoomID);

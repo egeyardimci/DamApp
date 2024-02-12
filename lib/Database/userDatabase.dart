@@ -147,32 +147,32 @@ class userDatabase {
   }
 
 
-  Future updateChatRooms(String? _uid1, String? _uid2,String? roomID,String? name) async {
+  Future updateChatRooms(String? senderid, String? recieverid,String? roomID,String? reciever, String? sender) async {
 
-    List chatRoomListU1 = await getSingleUserDataByID("chatrooms",_uid1) ?? [];
-    List chatRoomListU2 = await getSingleUserDataByID("chatrooms",_uid2) ?? [];
+    List chatRoomListSender = await getSingleUserDataByID("chatrooms",senderid) ?? [];
+    List chatRoomListReciever = await getSingleUserDataByID("chatrooms",recieverid) ?? [];
 
-    if(chatRoomListU1 == []){
+    if(chatRoomListSender == []){
       await userCollection.doc(uid).update({
-        'chatrooms': ["${roomID}_${name}"],
+        'chatrooms': ["${roomID}_${reciever}"],
       });
     }
     else{
-      chatRoomListU1.add("${roomID}_${name}");
+      chatRoomListSender.add("${roomID}_${reciever}");
       await userCollection.doc(uid).update({
-        'chatrooms': chatRoomListU1,
+        'chatrooms': chatRoomListSender,
       });
     }
 
-    if(chatRoomListU2 == []){
-      await userCollection.doc(_uid2).update({
-        'chatrooms': ["${roomID}_${name}"],
+    if(chatRoomListReciever == []){
+      await userCollection.doc(recieverid).update({
+        'chatrooms': ["${roomID}_${sender}"],
       });
     }
     else{
-      chatRoomListU2.add("${roomID}_${name}");
-      await userCollection.doc(_uid2).update({
-        'chatrooms': chatRoomListU2,
+      chatRoomListReciever.add("${roomID}_${sender}");
+      await userCollection.doc(recieverid).update({
+        'chatrooms': chatRoomListReciever,
       });
     }
 
