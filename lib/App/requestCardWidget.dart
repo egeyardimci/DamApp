@@ -15,9 +15,10 @@ class RequestCardWidget extends StatelessWidget {
   String location;
   String whoPays;
   String lookingFor;
+  String picture;
 
   RequestCardWidget({super.key,required this.name,required this.age, required this.date, required this.time,
-    required this.location, required this.lookingFor, required this.whoPays}
+    required this.location, required this.lookingFor, required this.whoPays, required this.picture}
       );
 
   @override
@@ -42,8 +43,14 @@ class RequestCardWidget extends StatelessWidget {
                               border: Border.all(color: Colors.grey.shade600, width: 2.0), // Set border color and width
                               borderRadius: BorderRadius.zero
                           ),
-                          child: Image(
-                            image: AssetImage("assets/paul_mescal.jpg"),
+                          child: picture != ""
+                              ? Image.network(
+                            picture,
+                            fit: BoxFit.cover,
+                          )
+                              : Image.asset(
+                            'assets/foto.jpeg', // Replace with your asset image path
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

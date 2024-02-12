@@ -35,7 +35,9 @@ class LikedRequestWidget extends StatelessWidget {
           location: requestData?.location ?? "",
           lookingFor: requestData?.preference ??
               "",
-          whoPays: requestData?.whopays ?? ""));
+          whoPays: requestData?.whopays ?? "",
+          picture: requestData?.picture ?? "")
+      );
     }
 
     return Scaffold(

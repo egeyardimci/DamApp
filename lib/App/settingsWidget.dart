@@ -1,13 +1,14 @@
 import 'package:agaol/Auth/authService.dart';
-import 'package:agaol/Models/userModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:agaol/App/bottomBarWidget.dart';
-import 'package:agaol/App/topBarWidget.dart';
 import 'package:flutter/widgets.dart';
 import "package:provider/provider.dart";
 import 'package:agaol/Database/userDatabase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import '../Providers/myUserProvider.dart';
 
@@ -29,6 +30,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
   String age = "";
   String name = "";
   String about = "";
+  String imageUrl = "";
 
   final AuthService _auth = AuthService();
 
@@ -206,6 +208,78 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       ),
                     ),
                   ),
+                  Card(
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 16.0),
+                                child: Column(
+                                  children: [
+                                    Text("Update Profile Picture"),
+                                    Row(
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () async {
+                                            ImagePicker imagePicker = ImagePicker();
+                                            XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+
+                                            Reference referenceRoot = FirebaseStorage.instance.ref();
+                                            Reference referenceImagesDirImages = referenceRoot.child('images');
+                                            Reference referenceImagetoUpload = referenceImagesDirImages.child(user!.uid);
+
+                                            try {
+                                              await referenceImagetoUpload.putFile(File(file!.path));
+                                              String newimageUrl = await referenceImagetoUpload.getDownloadURL();
+
+                                              setState(() {
+                                                imageUrl = newimageUrl;
+                                              });
+                                              await userDatabase(uid: user!.uid).updateSingleUserData("picture", imageUrl);
+                                            } catch (error) {
+                                              print(error);
+                                            }
+                                          },
+                                          child: Text('Upload from gallery'),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () async {
+                                            ImagePicker imagePicker = ImagePicker();
+                                            XFile? file = await imagePicker.pickImage(source: ImageSource.camera);
+
+                                            Reference referenceRoot = FirebaseStorage.instance.ref();
+                                            Reference referenceImagesDirImages = referenceRoot.child('images');
+                                            Reference referenceImagetoUpload = referenceImagesDirImages.child(user!.uid);
+
+                                            try {
+                                              await referenceImagetoUpload.putFile(File(file!.path));
+                                              String newimageUrl = await referenceImagetoUpload.getDownloadURL();
+
+                                              setState(() {
+                                                imageUrl = newimageUrl;
+                                              });
+                                              await userDatabase(uid: user.uid).updateSingleUserData("picture", imageUrl);
+                                            } catch (error) {
+                                              print(error);
+                                            }
+                                          },
+                                          child: Text('Upload from camera'),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 Consumer<myUserProvider>(builder: (context,_user,child){
                   return ElevatedButton(
                     onPressed: ()  async {
@@ -225,8 +299,11 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       if (about.isNotEmpty) {
                         await userDatabase(uid: user!.uid).updateSingleUserData("about", about);
                       }
+                      if (imageUrl.isNotEmpty) {
+                        await userDatabase(uid: user!.uid).updateSingleUserData("picture", imageUrl);
+                      }
 
-                      if(gender.isEmpty && age.isEmpty && name.isEmpty && preference.isEmpty && about.isEmpty) {
+                      if(gender.isEmpty && age.isEmpty && name.isEmpty && preference.isEmpty && about.isEmpty && imageUrl.isEmpty) {
 
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -251,6 +328,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         age = "";
                         name = "";
                         preference = "";
+                        imageUrl = "";
                         _nameController.text = "";
                         _aboutController.text = "";
                         _ageController.text = "";
@@ -271,7 +349,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   child: Text("Log Out"),
                 ),
               ),
-
 
             ]
         ),

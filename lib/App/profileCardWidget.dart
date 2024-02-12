@@ -9,8 +9,9 @@ class ProfileCardWidget extends StatelessWidget {
   String? preference;
   String? age;
   String? about;
+  String? picture;
 
-  ProfileCardWidget({super.key, required this.name,required this.gender, required this.age, required this.preference, required this.about});
+  ProfileCardWidget({super.key, required this.name,required this.gender, required this.age, required this.preference, required this.about, required this.picture});
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +27,16 @@ class ProfileCardWidget extends StatelessWidget {
                 topLeft: Radius.circular(4.0),
                 topRight: Radius.circular(4.0),
               ),
-              child: Image(
-                image: AssetImage("assets/paul_mescal.jpg"),
-                fit: BoxFit.cover,
+                child: picture != null
+                    ? Image.network(
+                  picture!,
+                  fit: BoxFit.cover,
+                )
+                    : Image.asset(
+                  'assets/foto.jpeg', // Replace with your asset image path
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(

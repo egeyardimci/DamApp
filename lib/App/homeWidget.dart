@@ -41,10 +41,22 @@ class _HomeWidgetState extends State<HomeWidget> {
 
     else {
 
-
-      final myUserProvider? _user = Provider.of<myUserProvider?>(context,listen: false);
       final userDatabase userDataBaseRef = userDatabase(uid: AuthService().currentUser!.uid);
       final requestDatabase requestDataBaseRef = requestDatabase();
+      final myUserProvider? _user = Provider.of<myUserProvider?>(context,listen: false);
+
+      //Check each request in the request list
+      for (int index = 0; index < requestData!.length; index++) {
+
+        //Remove the requests belonging to currently logged in user from requestData list
+        if (_user?.currentUser?.uid == requestData[index].uid ){
+          requestData.removeAt(index);
+          index--;
+        }
+      }
+      if(requestData == null){
+        return LoadingWidget();
+      }
 
       dynamic likecolor = Colors.grey.shade800;
       dynamic dislikecolor = Colors.grey.shade800;
@@ -78,7 +90,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                       location: requestData[widget.currentRequest].location ?? "",
                       lookingFor: requestData[widget.currentRequest].preference ??
                           "",
-                      whoPays: requestData[widget.currentRequest].whopays ?? ""),
+                      whoPays: requestData[widget.currentRequest].whopays ?? "",
+                      picture: requestData[widget.currentRequest].picture ?? "",
+                  ),
+
                   Container(
                     margin: EdgeInsets.fromLTRB(20, 40, 20,40),
                     child: Card(

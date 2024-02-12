@@ -14,6 +14,7 @@ class myRequest{
   String? uid = "";
   String? whopays = "";
   String? requestid = "";
+  String? picture = "";
 
   myRequest(
       {
@@ -27,7 +28,8 @@ class myRequest{
         this.whopays,
         this.acceptedby,
         this.declinedby,
-        this.requestid
+        this.requestid,
+        this.picture
       }
   );
 
@@ -43,6 +45,7 @@ class myRequest{
     this.acceptedby  = requestdata?["acceptedby"];
     this.declinedby  = requestdata?["declinedby"];
     this.requestid  = reqid;
+    this.picture = requestdata?["picture"];
 
   }
 
@@ -58,6 +61,7 @@ class myRequest{
       'whopays' : whopays,
       'acceptedby' : acceptedby,
       'declinedby' : declinedby,
+      'picture' : picture,
     };
 
   }

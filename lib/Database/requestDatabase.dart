@@ -14,7 +14,7 @@ class requestDatabase {
       .collection("requests");
 
   //Updates user's data
-  Future<DocumentReference> addNewRequest(name,uid,age,time,whopays,preference,location,date) async {
+  Future<DocumentReference> addNewRequest(name,uid,age,time,whopays,preference,location,date, picture) async {
     //Update the user collection in database
     return await requestCollection.add({
       'name' : name,
@@ -27,6 +27,7 @@ class requestDatabase {
       'date' : date,
       'acceptedby': [],
       'declinedby': [],
+      'picture' : picture
     });
   }
 

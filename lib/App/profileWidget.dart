@@ -74,9 +74,17 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       topLeft: Radius.circular(4.0),
                       topRight: Radius.circular(4.0),
                     ),
-                    child: Image(
-                      image: AssetImage("assets/paul_mescal.jpg"),
-                      fit: BoxFit.cover,
+                    child: AspectRatio(
+                      aspectRatio: 1.0, // Adjust the aspect ratio as needed
+                      child: _user.currentUser?.picture != null
+                          ? Image.network(
+                        _user.currentUser!.picture!,
+                        fit: BoxFit.cover,
+                      )
+                          : Image.asset(
+                        'assets/foto.jpeg', // Replace with your asset image path
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Padding(

@@ -18,6 +18,7 @@ class myUser{
   List? dislikedrequests= [];
   String? uid = "";
   List? chatrooms = [];
+  String? picture = "";
 
   myUser(
       {
@@ -29,7 +30,8 @@ class myUser{
         this.requests,
         this.likedrequests,
         this.dislikedrequests,
-        this.chatrooms
+        this.chatrooms,
+        this.picture,
       })
   {
     this.uid = AuthService().currentUser?.uid;
@@ -47,7 +49,7 @@ class myUser{
       dislikedrequests =  userdata?["dislikedrequests"];
       uid = AuthService().currentUser?.uid;
       chatrooms = userdata?["chatrooms"];
-
+      picture = userdata?["picture"];
   }
 
   Map<String, dynamic>? toMap(myUser user){
@@ -60,7 +62,8 @@ class myUser{
       'requests' : user.requests,
       'likedrequests' : user.likedrequests,
       'dislikedrequests' : user.dislikedrequests,
-      'chatrooms' : user.chatrooms
+      'chatrooms' : user.chatrooms,
+      'picture' : user.picture,
     };
   }
 

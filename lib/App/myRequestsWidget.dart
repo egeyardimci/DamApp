@@ -48,7 +48,9 @@ class _MyRequestsWidgetState extends State<MyRequestsWidget> {
                   location: requestData?.location ?? "",
                   lookingFor: requestData?.preference ??
                       "",
-                  whoPays: requestData?.whopays ?? ""));
+                  whoPays: requestData?.whopays ?? "",
+                  picture: requestData?.picture ?? ""
+              ));
               requestWidgetList.add(ElevatedButton(
                   onPressed:() async{
                     final myUserProvider _user = Provider.of<myUserProvider>(context,listen: false);

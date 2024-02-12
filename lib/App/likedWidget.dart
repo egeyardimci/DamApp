@@ -46,6 +46,7 @@ class _LikedWidgetState extends State<LikedWidget> {
           about: profile?.about,
           provider: provider,
           uid: profile?.uid,
+          picture: profile?.picture,
         )
         );
       }
@@ -80,6 +81,7 @@ class LikeProfileWidget extends StatefulWidget {
   String? age;
   String? about;
   String? uid;
+  String? picture;
   LikedWidgetProvider? provider;
 
   LikeProfileWidget({
@@ -90,8 +92,8 @@ class LikeProfileWidget extends StatefulWidget {
     required this.preference,
     required this.about,
     required this.provider,
-    required this.uid
-
+    required this.uid,
+    required this.picture,
   });
 
   @override
@@ -105,7 +107,7 @@ class _LikeProfileWidgetState extends State<LikeProfileWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ProfileCardWidget(name:widget.name, gender: widget.gender, age: widget.age, preference: widget.preference,about: widget.about) ,
+        ProfileCardWidget(name:widget.name, gender: widget.gender, age: widget.age, preference: widget.preference,about: widget.about, picture: widget.picture) ,
         Container(
           margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
           child: Card(
@@ -123,6 +125,7 @@ class _LikeProfileWidgetState extends State<LikeProfileWidget> {
                   List<String?> IDs = [widget.uid,AuthService().currentUser?.uid];
                   IDs.sort();
                   String? chatRoomID = "${IDs[0]!}_${IDs[1]!}";
+
                   List currentUserChatRooms = Provider.of<myUserProvider?>(context,listen: false)?.currentUser?.chatrooms ?? [];
 
                   if(!(currentUserChatRooms.contains(chatRoomID))){

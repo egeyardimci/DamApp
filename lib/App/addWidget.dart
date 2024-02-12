@@ -206,7 +206,7 @@ class _AddWidgetState extends State<AddWidget> {
 
                         DocumentReference newRequestDocument = await newRequest.addNewRequest(_user.currentUser?.name, _uid,
                             _user.currentUser?.age, time, whopays,
-                            _user.currentUser?.preference, location ,date);
+                            _user.currentUser?.preference, location ,date, _user.currentUser?.picture);
 
                         String? newRequestID = newRequestDocument.id;
                         await userDatabaseRef.updateRequestListAdd(newRequestID);
