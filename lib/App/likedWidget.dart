@@ -52,6 +52,23 @@ class _LikedWidgetState extends State<LikedWidget> {
       }
     }
 
+    if(widgetList.isEmpty){
+      return Scaffold(
+        appBar: TopBarWidget(title: 'DamApp',),
+        bottomNavigationBar: BottomBarWidget(currentindex: 0,),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: ()async{
+              await provider.fetchData();
+              setState(() {
+                reload != reload;
+              });
+            }, child: const Text("Refresh!"),
+          ),
+        ),
+      );
+    }
+      
     return Scaffold(
       appBar: TopBarWidget(title: 'DamApp',),
       bottomNavigationBar: BottomBarWidget(currentindex: 0,),
@@ -129,7 +146,7 @@ class _LikeProfileWidgetState extends State<LikeProfileWidget> {
                   List currentUserChatRooms = Provider.of<myUserProvider?>(context,listen: false)?.currentUser?.chatrooms ?? [];
 
                   if(!(currentUserChatRooms.contains(chatRoomID))){
-                    userDatabase(uid: AuthService().currentUser!.uid).updateChatRooms(AuthService().currentUser?.uid, widget.uid, chatRoomID);
+                    userDatabase(uid: AuthService().currentUser!.uid).updateChatRooms(AuthService().currentUser?.uid, widget.uid, chatRoomID, widget.name);
                   }
 
                   Navigator.pushNamed(context, "/chat",arguments:chatRoomID);

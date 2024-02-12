@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:agaol/App/bottomBarWidget.dart';
 import 'package:agaol/App/topBarWidget.dart';
@@ -10,6 +13,11 @@ import 'package:agaol/Database/userDatabase.dart';
 import "package:provider/provider.dart";
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../Auth/authService.dart';
+import '../Database/chatDatabase.dart';
+import '../Providers/myUserProvider.dart';
+import '../loadingWidget.dart';
+
 
 
 class MessagesWidget extends StatefulWidget {
@@ -21,50 +29,75 @@ class MessagesWidget extends StatefulWidget {
 
 class _MessagesWidgetState extends State<MessagesWidget> {
 
-  String imageUrl = "";
 
-  @override
-  Widget build(BuildContext context) {
-    final User? user = Provider.of<User?>(context);
-
-    return Scaffold(
-      appBar: TopBarWidget(title: 'DamApp',),
-      body: Center(
-        child: Container(
-          child: imageUrl!= "" ? Image.network(imageUrl) : Container(),
+  bool reload = false;
+  Widget _buildChatRooms(String? roomid) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 90,
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 6),
+                    child: Text(
+                      roomid?.split("_")[2] ?? "",
+                      style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: IconButton(
+                      onPressed: (){
+                        Navigator.pushNamed(context, "/chat",
+                            arguments:"${roomid?.split("_")[0]}_${roomid?.split("_")[1]}");
+                      },
+                      icon: Icon(Icons.arrow_forward_ios),
+                  ),
+                ),
+              ]
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          ImagePicker imagePicker = ImagePicker();
-          XFile? file = await imagePicker.pickImage(source: ImageSource.camera);
-          print("${file?.path}");
+    );
+  }
 
+  @override
+  build(BuildContext context) {
+    final myUserProvider? user = Provider.of<myUserProvider?>(context);
 
-          Reference referenceRoot = FirebaseStorage.instance.ref();
-          Reference referenceImagesDirImages = referenceRoot.child('images');
-          Reference referenceImagetoUpload = referenceImagesDirImages.child("dummyfile");
-
-          try{
-            await referenceImagetoUpload.putFile(File(file!.path));
-            String newimageUrl = await referenceImagetoUpload.getDownloadURL();
-
-            setState(() {
-              imageUrl = newimageUrl;
-            });
-            await userDatabase(uid: user!.uid).updateSingleUserData("picture", imageUrl);
-          }
-          catch(error) {
-            print(error);
-          }
-
-
-          },
-
-        tooltip: 'Pick Image',
-        child: Icon(Icons.add_a_photo),
+    return Scaffold(
+      bottomNavigationBar: BottomBarWidget(currentindex: 4,),
+      appBar: TopBarWidget(title: 'DamApp',),
+      body: Container(
+        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: Column(
+            children: [
+              Expanded(
+                child: RefreshIndicator(
+                  onRefresh: ()async{
+                    user.updateUserData();
+                    setState(() {
+                      reload != reload;
+                    });
+                  },
+                  child: ListView(
+                    children: user!.currentUser!.chatrooms!.map((rooms) =>
+                        _buildChatRooms(rooms)).toList(),
+                  ),
+                ),
+              ),
+            ]
+        ),
       ),
-      bottomNavigationBar: BottomBarWidget(currentindex: 0,),
     );
   }
 }

@@ -147,18 +147,18 @@ class userDatabase {
   }
 
 
-  Future updateChatRooms(String? _uid1, String? _uid2,String? roomID) async {
+  Future updateChatRooms(String? _uid1, String? _uid2,String? roomID,String? name) async {
 
     List chatRoomListU1 = await getSingleUserDataByID("chatrooms",_uid1) ?? [];
     List chatRoomListU2 = await getSingleUserDataByID("chatrooms",_uid2) ?? [];
 
     if(chatRoomListU1 == []){
       await userCollection.doc(uid).update({
-        'chatrooms': [roomID],
+        'chatrooms': ["${roomID}_${name}"],
       });
     }
     else{
-      chatRoomListU1.add(roomID);
+      chatRoomListU1.add("${roomID}_${name}");
       await userCollection.doc(uid).update({
         'chatrooms': chatRoomListU1,
       });
@@ -166,11 +166,11 @@ class userDatabase {
 
     if(chatRoomListU2 == []){
       await userCollection.doc(_uid2).update({
-        'chatrooms': [roomID],
+        'chatrooms': ["${roomID}_${name}"],
       });
     }
     else{
-      chatRoomListU2.add(roomID);
+      chatRoomListU2.add("${roomID}_${name}");
       await userCollection.doc(_uid2).update({
         'chatrooms': chatRoomListU2,
       });

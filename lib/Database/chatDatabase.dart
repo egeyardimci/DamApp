@@ -11,6 +11,14 @@ class chatDatabase{
     return chatCollection.doc(roomID).collection("messages").orderBy("timestamp",descending: false).snapshots();
   }
 
+  Stream<QuerySnapshot> getUserChatRooms(List? chatrooms) {
+
+    return chatCollection.where(
+      FieldPath.documentId,
+      whereIn: chatrooms
+    ).snapshots();
+  }
+
   Future sendMessage(String roomID, String name,String? message) async{
     await chatCollection.doc(roomID).collection("messages").add(
       {
