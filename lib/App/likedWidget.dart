@@ -1,6 +1,7 @@
 import 'package:agaol/App/profileCardWidget.dart';
 import 'package:agaol/App/profileWidget.dart';
 import 'package:agaol/App/requestCardWidget.dart';
+import 'package:agaol/Auth/authService.dart';
 import 'package:agaol/Models/requestModel.dart';
 import 'package:agaol/Models/userModel.dart';
 import 'package:agaol/Providers/likedWidgetProvider.dart';
@@ -115,7 +116,14 @@ class _LikeProfileWidgetState extends State<LikeProfileWidget> {
                 },
                   icon: Icon(Icons.document_scanner),
                 ),
-                IconButton(onPressed: () {},
+                IconButton(onPressed: () {
+
+                  List<String?> IDs = [widget.uid,AuthService().currentUser?.uid];
+                  IDs.sort();
+                  String? chatRoomID = IDs[0]! + IDs[1]!;
+
+                  Navigator.pushNamed(context, "/chat",arguments:chatRoomID);
+                },
                   icon: Icon(Icons.message),
                 ),
                 IconButton(onPressed: () {},
