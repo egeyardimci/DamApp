@@ -24,7 +24,7 @@ class _ChatWidgetState extends State<ChatWidget> {
     Map<String?,dynamic> data = snapshot.data() as Map<String?,dynamic>;
     var messageAlign = Alignment.centerLeft;
 
-    if(data["author"] == AuthService().currentUser?.uid){
+    if(data["authorID"] == AuthService().currentUser?.uid){
       messageAlign = Alignment.centerRight;
     }
 
