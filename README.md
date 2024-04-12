@@ -13,4 +13,5 @@ seamlessly within the app. (Work in Progress) </br>
 • Utilized Jira for team planning, and task tracking, employed GitHub for collaborative app 
 development.
 </br>
-Made by Ege Yardımcı and Aslıhan Hamzaoğlu.
+</br>
+• Made by Ege Yardımcı and Aslıhan Hamzaoğlu.
