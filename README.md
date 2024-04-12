@@ -11,4 +11,6 @@ on authentication status and real time data changes. </br>
 • Developed real-time messaging features, allowing users to communicate, chat, and meet </br>
 seamlessly within the app. (Work in Progress) </br>
 • Utilized Jira for team planning, and task tracking, employed GitHub for collaborative app 
-development. </br>
+development.
+</br>
+Made by Ege Yardımcı and Aslıhan Hamzaoğlu.
