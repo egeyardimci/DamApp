@@ -74,6 +74,22 @@ class _MessagesWidgetState extends State<MessagesWidget> {
   build(BuildContext context) {
     final myUserProvider? user = Provider.of<myUserProvider?>(context);
 
+    if(user!.currentUser!.chatrooms == null){
+      return Scaffold(
+        appBar: TopBarWidget(title: 'DamApp',),
+        bottomNavigationBar: BottomBarWidget(currentindex: 0,),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: ()async{
+              setState(() {
+                reload != reload;
+              });
+            }, child: const Text("Refresh!"),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       bottomNavigationBar: BottomBarWidget(currentindex: 4,),
       appBar: TopBarWidget(title: 'DamApp',),
