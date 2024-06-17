@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../Models/requestModel.dart';
+import '../Models/userModel.dart';
+import '../Database/userDatabase.dart';
 
 class requestDatabase {
 
@@ -14,20 +16,16 @@ class requestDatabase {
       .collection("requests");
 
   //Updates user's data
-  Future<DocumentReference> addNewRequest(name,uid,age,time,whopays,preference,location,date, picture) async {
+  Future<DocumentReference> addNewRequest(uid,time,whopays,location,date) async {
     //Update the user collection in database
     return await requestCollection.add({
-      'name' : name,
       'uid': uid,
       'time': time,
       'whopays': whopays,
-      'preference': preference,
-      'age' : age,
       'location': location,
       'date' : date,
       'acceptedby': [],
-      'declinedby': [],
-      'picture' : picture
+      'declinedby': []
     });
   }
 
@@ -45,8 +43,20 @@ class requestDatabase {
       requestList.add(myRequest.fromMap(requestdata?.data() as Map<String, dynamic>?,requestdata?.id));
     }
 
-    return requestList;
+    for(var i = 0; i < requestList.length; i++) {
+      String? uid = requestList[i].uid;
 
+      if (uid != null) {
+        userDatabase userDb = userDatabase(uid: uid);
+        myUser user = await userDb.getUserDataByID(uid) as myUser;
+        requestList[i].picture = user.picture;
+        requestList[i].name = user.name;
+        requestList[i].age = user.age;
+        requestList[i].preference = user.preference;
+      }
+    }
+
+    return requestList;
   }
 
   Future<myRequest> getRequestByID(String? id) async{
@@ -56,6 +66,18 @@ class requestDatabase {
     Map<String, dynamic>? requestMap = snapshot.data() as Map<String, dynamic>?;
 
     myRequest current = myRequest.fromMap(requestMap,requestID);
+
+    String? uid = current.uid;
+
+    if (uid != null) {
+      userDatabase userDb = userDatabase(uid: uid);
+      myUser user = await userDb.getUserDataByID(uid) as myUser;
+      current.picture = user.picture;
+      current.name = user.name;
+      current.age = user.age;
+      current.preference = user.preference;
+    }
+
     return current;
   }
 
